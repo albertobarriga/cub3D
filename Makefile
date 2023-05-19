@@ -3,7 +3,13 @@ LIBFT = libft/libft.a
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 SRC = 	src/main.c \
-	 	src/parser.c 
+		src/init.c \
+	 	src/parser.c \
+		src/raycaster/init_raycaster.c 
+
+LIBM = MLX42/libmlx42.a
+
+GLFW = -I include -lglfw -L /sgoinfre/goinfre/Perso/abarriga/homebrew/Cellar/glfw/3.3.8/lib
 
 AUTHOR = jlimones / abarriga
 DATE = 18/05/2023
@@ -39,22 +45,30 @@ endif
 	@printf "%b" "$(OBJ_COLOR)CC: 	$(WARN_COLOR)$(CC)\n\033[m"
 	@printf "%b" "$(OBJ_COLOR)Flags: 	$(WARN_COLOR)$(FLAGS)\n\033[m"
 
-$(NAME): ${OBJ}
+$(NAME): ${OBJ} $(LIBM)
 	@make -C libft
-	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT)
+	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT) $(LIBM) $(GLFW)
 	@printf "%b" "$(OK_COLOR)" "cub3D compilado\n"
+
+$(LIBM):
+	@make -C MLX42
 
 skiperror:
 	@$(CC) -o $(NAME) $(SRC)
 
 clean: header
 	@make clean -C libft
+	@make clean -C ./MLX42
+	# @make -C $(LIBM_DIR) clean
 	@rm -f $(OBJ)
 
 fclean: header clean
+	@make fclean -C ./MLX42
 	@rm -f $(NAME)
 	@make fclean -C libft
 	@printf "%b" "$(OK_COLOR)" "fclean ejecutado correctamente\n"
 	
 
 re: fclean all
+
+.PHONY: all lib clean fclean re
