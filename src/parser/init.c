@@ -6,11 +6,22 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:15:12 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/19 17:15:38 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/19 18:13:02 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
+
+void ft_search_first(int fd, int height)
+{
+	char	*line;
+
+	while (height >= 0)
+	{
+		line = get_next_line(fd);
+		free(line);
+	}
+}
 
 /**
  * @brief Funcion para encontrar la primera linea del mapa
@@ -107,4 +118,37 @@ void    height_map(char *path_map, t_map *map)
 		map->height++;
 	}
 	close(fd);
+}
+
+char **fill_map(char *path_map, t_map *map)
+{
+	char	**map_fill;
+	char	**line;
+	int		width;
+	int		height;
+	int		fd;
+
+	fd = open(path_map, O_RDONLY);
+	if (fd < 0)
+		return (NULL);
+	ft_search_first(fd, map->height);
+	line = malloc(sizeof(char*) * map->height);
+	line[0] = get_next_line(fd);
+	height = -1;
+	printf("%s\n", line[0]);
+	map_fill = malloc(sizeof(char*) * map->height);
+	while (++height < map->height)
+	{
+		map_fill[height] = ft_calloc(sizeof(char), width);
+		width = -1;
+		while (++width < map->width)
+		{
+			if (line[height][width] != ' ')
+				map_fill[height][width] = line[height][width];
+			else
+				map_fill[height][width] = '.';
+		}
+		free(line);
+	}
+	return (map_fill);
 }
