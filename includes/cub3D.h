@@ -7,6 +7,15 @@
 # include <string.h>
 # include <stdlib.h>
 
-int    longest_line(char *map);
+typedef struct s_map
+{
+	int		width;
+	int		height;
+}	t_map;
+
+
+void	width_map(char *path_map, t_map	*map);
+char	**fill_map(char *_path_map, t_map *map);
+void    height_map(char *path_map, t_map *map);
 
 #endif 
