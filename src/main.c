@@ -20,11 +20,14 @@ int main(int argc, char **argv)
         return 0;
     init_map(&map, argv[1]);
 	print_matrix(map.map_fill);
-    printf("%s\n", map.NO);
-    printf("%s\n", map.WE);
-    printf("%s\n", map.EA);
-    printf("%s\n", map.SO);
-    printf("%s\n", map.F);
-    printf("%s\n", map.C);
+    printf("NO  %s\n", map.NO);
+    printf("WE   %s\n", map.WE);
+    printf("EA   %s\n", map.EA);
+    printf("SO   %s\n", map.SO);
+    printf("F    %s\n", map.F);
+    printf("C    %s\n", map.C);
     leaks();
 }
+
+
+//TODO el parseo de cuantas letras y caracteres raros en el mapa

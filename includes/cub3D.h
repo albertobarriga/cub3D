@@ -9,17 +9,17 @@
 
 typedef struct s_map
 {
-	int		width;
-	int		height;
-	int		start_map;
-	char	**map_fill;
-	char	*NO;
-	char	*SO;
-	char	*WE;
-	char	*EA;
-	char	*C;
-	char	*F;
-	char	orientation;
+	int		width; //ancho del mapa
+	int		height; //alto del mapa
+	int		start_map; //linea en la que empieza el mapa en el archivo
+	char	**map_fill; //matriz que contiene el mapa
+	char	*NO; //contiene ruta a la imagen a cargar
+	char	*SO; //contiene ruta a la imagen a cargar
+	char	*WE; //contiene ruta a la imagen a cargar
+	char	*EA; //contiene ruta a la imagen a cargar
+	char	*C; //contiene los colores del techo
+	char	*F; // contiene los collores del suelo
+	char	orientation; // Falta por rellenar
 }	t_map;
 
 
