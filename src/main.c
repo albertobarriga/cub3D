@@ -12,15 +12,17 @@ void print_matrix(char **matrix)
 		printf("%s\n", matrix[i]);
 }
 
-int main(void)
+int main(int argc, char **argv)
 {
     t_map		map;
-    char		*path;
 
-    path = "map.cub";
-    width_map(path, &map);
-    //height_map(path,& map);
-	map.map_fill = fill_map(path, &map);
+    if (argc != 2)
+        return 0;
+    init_map(&map, argv[1]);
 	print_matrix(map.map_fill);
+    printf("%s\n", map.NO);
+    printf("%s\n", map.WE);
+    printf("%s\n", map.EA);
+    printf("%s\n", map.SO);
     leaks();
 }
