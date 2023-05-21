@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 12:53:59 by jlimones          #+#    #+#             */
-/*   Updated: 2022/09/26 19:56:48 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/21 04:30:12 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+void	*ft_memmove(void *dst, const void *src, int len)
 {
-	size_t		i;
+	int		i;
 	const char	*s;
 	char		*d;
 

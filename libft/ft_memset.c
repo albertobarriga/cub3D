@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 17:45:14 by jlimones          #+#    #+#             */
-/*   Updated: 2022/09/21 16:42:52 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/21 04:30:12 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-void	*ft_memset(void *b, int c, size_t len)
+void	*ft_memset(void *b, int c, int len)
 {
 	unsigned char	*ptr;
 

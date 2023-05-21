@@ -5,6 +5,7 @@ CFLAGS = -Wall -Werror -Wextra
 SRC = 	src/main.c \
 	 	src/parser/parser.c \
 	 	src//parser/init.c \
+	 	src//parser/utils_parser.c \
 
 AUTHOR = jlimones / abarriga
 DATE = 18/05/2023

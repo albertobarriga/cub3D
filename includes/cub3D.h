@@ -11,12 +11,17 @@ typedef struct s_map
 {
 	int		width;
 	int		height;
+	int		start_map;
+	char	**map_fill;
 }	t_map;
 
 
 void	width_map(char *path_map, t_map	*map);
 char	**fill_map(char *_path_map, t_map *map);
 void    height_map(char *path_map, t_map *map);/*Funcion para revisar map->height lo guarda la funcion anterior*/
-int		first_line_map(int fd);
+int		first_line_map(int fd, t_map *map);
+
+/*utils_parse.c*/
+void 	ft_search_first(int fd, int height);
 
 #endif 

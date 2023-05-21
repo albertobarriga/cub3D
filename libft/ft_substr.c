@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 08:44:56 by jlimones          #+#    #+#             */
-/*   Updated: 2022/12/03 13:08:39 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/21 04:34:02 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@
  * @param start Indice a partir del cual copiar
  * @return Puntero al substring
 */
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, int len)
 {
 	char	*str;
-	size_t	i;
+	int	i;
 
-	if (start >= ft_strlen(s))
+	if (start >= (unsigned int)ft_strlen(s))
 		return (ft_strdup(""));
 	if (!s)
 		return (NULL);
-	if (ft_strlen(s) - start < len)
-		len = ft_strlen(s) - start;
+	if ((unsigned int)ft_strlen(s) - start < (unsigned int)len)
+		len = (unsigned int)ft_strlen(s) - start;
 	str = malloc(sizeof(char) * len + 1);
 	if (!str)
 		return (NULL);
