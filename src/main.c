@@ -24,5 +24,7 @@ int main(int argc, char **argv)
     printf("%s\n", map.WE);
     printf("%s\n", map.EA);
     printf("%s\n", map.SO);
+    printf("%s\n", map.F);
+    printf("%s\n", map.C);
     leaks();
 }

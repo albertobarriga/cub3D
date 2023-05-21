@@ -6,7 +6,7 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 06:55:19 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/21 06:55:59 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/21 07:14:35 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	*save_struct_walls(char *line)
 	i = 0;
 	j = 0;
 
-	while (line[i] != '.')
+	while (line[i] != '.' && !ft_isdigit(line[i]))
 		i++;
 	path = calloc(sizeof(char), (ft_strlen(line) - i));
 	while (line[i] && line[i] != '\n')
@@ -116,6 +116,10 @@ void	fill_wall(t_map *map, char *path_map)
 			map->WE = save_struct_walls(line);
 		else if (ft_strnstr(line, "EA", 2))
 			map->EA = save_struct_walls(line);
+		else if (ft_strnstr(line, "F", 1))
+			map->F = save_struct_walls(line);
+		else if (ft_strnstr(line, "C", 1))
+			map->C = save_struct_walls(line);
 		free(line);
 	}
 }
