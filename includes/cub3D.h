@@ -7,6 +7,15 @@
 # include <string.h>
 # include <stdlib.h>
 
+typedef struct s_pj
+{
+
+	char	orientation; // orientacion inicial
+	int		y; //posicion Y inicial
+	int		x; //posicion X inicial
+	
+}	t_pj;
+
 typedef struct s_map
 {
 	int		width; //ancho del mapa
@@ -18,10 +27,8 @@ typedef struct s_map
 	char	*WE; //contiene ruta a la imagen a cargar
 	char	*EA; //contiene ruta a la imagen a cargar
 	char	*C; //contiene los colores del techo
-	char	*F; // contiene los collores del suelo
-	char	orientation; // Falta por rellenar
+	char	*F; // contiene los colores del suelo
 }	t_map;
-
 
 void	width_map(char *path_map, t_map	*map);
 char	**fill_map(char *_path_map, t_map *map);
@@ -34,4 +41,6 @@ void 	ft_search_first(int fd, int height);
 
 void	init_map(t_map *map, char *path);
 
+
+void    ft_help_argv(char *error);
 #endif 

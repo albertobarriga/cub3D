@@ -1,4 +1,5 @@
 #include "../includes/cub3D.h"
+
 void	leaks(void)
 {
 	system("leaks -q cub3D");
@@ -17,9 +18,10 @@ int main(int argc, char **argv)
     t_map		map;
 
     if (argc != 2)
-        return 0;
+        ft_help_argv("insufficient arguments\n");
     init_map(&map, argv[1]);
 	print_matrix(map.map_fill);
+    printf("start_map  %i\n", map.start_map);
     printf("NO  %s\n", map.NO);
     printf("WE   %s\n", map.WE);
     printf("EA   %s\n", map.EA);

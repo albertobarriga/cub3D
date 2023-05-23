@@ -6,7 +6,7 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 06:55:19 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/21 07:14:35 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/22 18:17:33 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,59 +67,16 @@ char **fill_map(char *path_map, t_map *map)
 	return (map_fill);
 }
 
-/**
- * @brief recogge la ruta de la im,agen a cargar
- * 
- * @param wall 
- * @param line 
- * @return char* 
- */
-char	*save_struct_walls(char *line)
+int count_letters(t_map *map)
 {
-	int		i;
-	int		j;
-	char	*path;
+    int i;
+    int j;
 
-	i = 0;
-	j = 0;
-
-	while (line[i] != '.' && !ft_isdigit(line[i]))
-		i++;
-	path = calloc(sizeof(char), (ft_strlen(line) - i));
-	while (line[i] && line[i] != '\n')
-	{
-		path[j] = line[i];
-		j++;
-		i++;
-	}
-	return (path);
-}
-
-void	fill_wall(t_map *map, char *path_map)
-{
-	int		fd;
-	int		i;
-	char	*line;
-
-	i = -1;
-	fd = open(path_map, O_RDONLY);
-	if (fd < 0)
-		return ;
-	while (++i <= map->height)
-	{
-		line = get_next_line(fd);
-		if (ft_strnstr(line, "NO", 2))
-			map->NO = save_struct_walls(line);
-		else if (ft_strnstr(line, "SO", 2))
-			map->SO = save_struct_walls(line);
-		else if (ft_strnstr(line, "WE", 2))
-			map->WE = save_struct_walls(line);
-		else if (ft_strnstr(line, "EA", 2))
-			map->EA = save_struct_walls(line);
-		else if (ft_strnstr(line, "F", 1))
-			map->F = save_struct_walls(line);
-		else if (ft_strnstr(line, "C", 1))
-			map->C = save_struct_walls(line);
-		free(line);
-	}
+    i = map->start_map - 1;
+    while (++i <= map->height)
+    {
+        j = -1;
+        while (j <= map->width)
+    }
+    
 }

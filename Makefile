@@ -4,9 +4,10 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 SRC = 	src/main.c \
 	 	src/parser/parser.c \
-	 	src//parser/init.c \
-	 	src//parser/utils_parser.c \
-	 	src//parser/utils_init.c \
+	 	src/parser/init.c \
+	 	src/parser/utils_parser.c \
+	 	src/parser/utils_init.c \
+	 	src/checker/error.c \
 
 AUTHOR = jlimones / abarriga
 DATE = 18/05/2023
