@@ -15,6 +15,7 @@ void print_matrix(char **matrix)
 int main(int argc, char **argv)
 {
     t_map		map;
+	t_args		args;
 
     if (argc != 2)
         return 0;
@@ -26,8 +27,11 @@ int main(int argc, char **argv)
     printf("SO   %s\n", map.SO);
     printf("F    %s\n", map.F);
     printf("C    %s\n", map.C);
+	init_args_mlx(&args);
+	init_args(&args);
+	mlx_loop(args.mlx);
+	mlx_delete_image(args.mlx, args.img);
+	mlx_terminate(args.mlx);
     leaks();
 }
 
-
-//TODO el parseo de cuantas letras y caracteres raros en el mapa
