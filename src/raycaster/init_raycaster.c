@@ -15,6 +15,9 @@ void	init_args_mlx(t_args *args)
 void	init_args(t_args *args)
 {
 	mlx_loop_hook(args->mlx, &hook, args);
+	mlx_set_cursor_mode(args->mlx, MLX_MOUSE_DISABLED);
+	// mlx_get_time;
+	// mlx_loop(mlx);
 }
 
 void	hook(void *param)
