@@ -14,7 +14,7 @@ void	init_args_mlx(t_args *args)
 
 void	init_args(t_args *args)
 {
-	mlx_key_hook(args->mlx, &hook, args);
+	mlx_loop_hook(args->mlx, &hook, args);
 }
 
 void	hook(void *param)

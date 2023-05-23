@@ -9,7 +9,18 @@ SRC = 	src/main.c \
 
 LIBM = MLX42/libmlx42.a
 
-GLFW = -I include -lglfw -L /sgoinfre/goinfre/Perso/abarriga/homebrew/Cellar/glfw/3.3.8/lib
+ifeq ($(USER), abarriga)
+	GLFW = -I include -lglfw -L /sgoinfre/goinfre/Perso/abarriga/homebrew/Cellar/glfw/3.3.8/lib
+else
+	GLFW = -I include -lglfw -L /opt/homebrew/opt/glfw/lib
+endif
+# Mac 42
+# GLFW = -I include -lglfw -L /sgoinfre/goinfre/Perso/abarriga/homebrew/Cellar/glfw/3.3.8/lib
+
+# Mac alberto
+# GLFW = -I include -lglfw -L /opt/homebrew/opt/glfw/lib
+
+
 
 AUTHOR = jlimones / abarriga
 DATE = 18/05/2023
