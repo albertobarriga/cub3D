@@ -28,7 +28,7 @@ int main(int argc, char **argv)
     printf("F    %s\n", map.F);
     printf("C    %s\n", map.C);
 	init_args_mlx(&args);
-	init_args(&args);
+	init_args(&args, &map);
 	mlx_loop(args.mlx);
 	mlx_delete_image(args.mlx, args.img);
 	mlx_terminate(args.mlx);

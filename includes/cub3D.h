@@ -7,8 +7,8 @@
 # include <stdio.h>
 # include <string.h>
 # include <stdlib.h>
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 900
+# define HEIGHT 600
 
 typedef struct s_map
 {
@@ -29,6 +29,7 @@ typedef struct s_args
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
+	mlx_image_t	*back;
 }	t_args;
 
 void	width_map(char *path_map, t_map	*map);
@@ -42,9 +43,10 @@ void 	ft_search_first(int fd, int height);
 
 void	init_map(t_map *map, char *path);
 
-
+// RAYCASTER
 void	init_args_mlx(t_args *args);
-void	init_args(t_args *args);
+void	init_args(t_args *args, t_map *map);
 void	hook(void *param);
+void	print_back(t_args *args, t_map *map);
 
 #endif 
