@@ -6,7 +6,7 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 06:55:19 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/22 18:17:33 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/24 08:45:33 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,10 @@ int count_letters(t_map *map)
     while (++i <= map->height)
     {
         j = -1;
-        while (j <= map->width)
+        while (++j <= map->width)
+        {
+            if (map->map_fill[i][j])
+        }
     }
     
 }
