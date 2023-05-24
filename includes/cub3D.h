@@ -27,9 +27,14 @@ typedef struct s_map
 
 typedef struct s_args
 {
-	mlx_t		*mlx;
-	mlx_image_t	*img;
-	mlx_image_t	*back;
+	mlx_t			*mlx;
+	mlx_image_t		*img;
+	mlx_image_t		*back;
+	mlx_texture_t	*no_text;
+	mlx_texture_t	*so_text;
+	mlx_texture_t	*we_text;
+	mlx_texture_t	*ea_text;
+	t_map			*map;
 }	t_args;
 
 void	width_map(char *path_map, t_map	*map);
@@ -39,7 +44,7 @@ int		first_line_map(int fd, t_map *map);
 void	fill_wall(t_map *map, char *path_map);
 
 /*utils_parse.c*/
-void 	ft_search_first(int fd, int height);
+void	ft_search_first(int fd, int height);
 
 void	init_map(t_map *map, char *path);
 
@@ -48,5 +53,7 @@ void	init_args_mlx(t_args *args);
 void	init_args(t_args *args, t_map *map);
 void	hook(void *param);
 void	print_back(t_args *args, t_map *map);
+void	mlx_load_text(t_args *args, t_map *map);
+void	exit_cub(t_args *args);
 
 #endif 

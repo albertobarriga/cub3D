@@ -3,6 +3,7 @@ LIBFT = libft/libft.a
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 SRC = 	src/main.c \
+		src/exit.c \
 	 	src/parser/parser.c \
 	 	src//parser/init.c \
 	 	src//parser/utils_parser.c \
