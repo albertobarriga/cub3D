@@ -64,7 +64,7 @@ void	print_back(t_args *args, t_map *map)
 			if (j < mid_height)
 				mlx_put_pixel(args->back, i, j, map->floor_color);
 			else
-				mlx_put_pixel(args->back, i, j, map->ceilling_color);
+				mlx_put_pixel(args->back, i, j, map->ceiling_color);
 			i++;
 		}
 		j++;
@@ -74,10 +74,10 @@ void	print_back(t_args *args, t_map *map)
 
 void	mlx_load_text(t_args *args, t_map *map)
 {
-	args->no_text = mlx_load_png(map->NO);
-	args->so_text = mlx_load_png(map->SO);
-	args->we_text = mlx_load_png(map->WE);
-	args->ea_text = mlx_load_png(map->EA);
+	args->no_text = mlx_load_png(map->no);
+	args->so_text = mlx_load_png(map->so);
+	args->we_text = mlx_load_png(map->we);
+	args->ea_text = mlx_load_png(map->ea);
 	if (!args->no_text || !args->so_text || !args->we_text || !args->ea_text)
 		exit_cub(args);
 	
