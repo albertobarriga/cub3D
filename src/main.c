@@ -9,6 +9,7 @@ void	print_matrix(char **matrix)
 {
 	int	i;
 
+	printf("termina\n");
 	i = -1;
 	while (matrix[++i])
 		printf("%s\n", matrix[i]);
@@ -44,8 +45,11 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		ft_help_argv("insufficient arguments\n");
+	// if (checker_map(argv[1], &map))
+	// 	ft_help_argv("character not compatible\n");
 	init_map(&map, argv[1]);
-	print_matrix(map.map_fill);
+	printf("height = %i\n", map.height);
+	printf("width = %i\n", map.width);
 	printf("start_map  %i\n", map.start_map);
 	printf("NO  %s\n", map.no);
 	printf("WE   %s\n", map.we);
@@ -54,12 +58,14 @@ int	main(int argc, char **argv)
 	printf("F    %s\n", map.f);
 	printf("C    %s\n", map.c);
 	printf("F color    %x\n", map.floor_color);
+	print_matrix(map.map_fill);
 	// init_args_mlx(&args);
 	// init_args(&args, &map);
 	// mlx_loop(args.mlx);
 	// mlx_delete_image(args.mlx, args.img);
 	// mlx_terminate(args.mlx);
-	printf("C color   %x\n", map.ceiling_color);
-	free_struct_map(&map);
+	// printf("C color   %x\n", map.ceiling_color);
+	printf("llega\n");
+	//free_struct_map(&map);
 }
 

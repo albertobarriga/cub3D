@@ -6,13 +6,13 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 04:42:51 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/25 15:40:14 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/25 18:18:40 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-void ft_search_first(int fd, int height)
+void	ft_search_first(int fd, int height)
 {
 	char	*line;
 
@@ -99,8 +99,6 @@ void	width_map(char *path_map, t_map	*map)
 	fd = open(path_map, O_RDONLY);
 	map->width = 0;
 	map->height = 0;
-	if (fd < 0 || !path_map)
-		return ;
 	first_line = first_line_map(fd, map);
 	fd = open(path_map, O_RDONLY);
 	while (first_line-- > 1)

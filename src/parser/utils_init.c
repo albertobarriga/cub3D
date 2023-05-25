@@ -6,24 +6,11 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 06:55:19 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/25 16:25:25 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/25 19:14:50 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
-
-/**
- * @brief Chequea que sea un carater valido
- * 
- * @param c caracter a chequear
- * @return int 0 si no es valido 1 si lo es
- */
-/* static int	is_char_valid(char c)
-{
-	if (c == '1' || c == '0' || c == ' ')
-		return (1);
-	return (0);
-} */
 
 /**
  * @brief reserva memoria y rellena una matriz guardando un punto
