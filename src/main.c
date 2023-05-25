@@ -5,7 +5,6 @@ void	leaks(void)
 	system("leaks -q cub3D");
 }
 
-
 void	print_matrix(char **matrix)
 {
 	int	i;
@@ -15,12 +14,34 @@ void	print_matrix(char **matrix)
 		printf("%s\n", matrix[i]);
 }
 
+void	free_matrix(char **matrix)
+{
+	int		i;
+
+	i = -1;
+	while (matrix[++i])
+		free(matrix[i]);
+	free(matrix);
+}
+
+void	free_struct_map(t_map *map)
+{
+	free_matrix(map->map_fill);
+	free(map->c);
+	free(map->f);
+	free(map->ea);
+	free(map->so);
+	free(map->we);
+	free(map->no);
+
+}
+
 int	main(int argc, char **argv)
 {
+	atexit(leaks);
 	t_map	map;
-	t_args		args;
+	//t_args		args;
 
-	//atexit(leaks);
 	if (argc != 2)
 		ft_help_argv("insufficient arguments\n");
 	init_map(&map, argv[1]);
@@ -33,11 +54,12 @@ int	main(int argc, char **argv)
 	printf("F    %s\n", map.f);
 	printf("C    %s\n", map.c);
 	printf("F color    %x\n", map.floor_color);
-	init_args_mlx(&args);
-	init_args(&args, &map);
-	mlx_loop(args.mlx);
-	mlx_delete_image(args.mlx, args.img);
-	mlx_terminate(args.mlx);
+	// init_args_mlx(&args);
+	// init_args(&args, &map);
+	// mlx_loop(args.mlx);
+	// mlx_delete_image(args.mlx, args.img);
+	// mlx_terminate(args.mlx);
 	printf("C color   %x\n", map.ceiling_color);
+	free_struct_map(&map);
 }
 

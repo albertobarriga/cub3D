@@ -6,7 +6,7 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:15:12 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/25 16:45:47 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/25 17:44:41 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	init_color(t_map *map)
 {
-	char	**colors;
-	int		i;
+	char			**colors;
+	int				i;
 	unsigned char	rgb[3];
 
 	colors = ft_split(map->c, ',');
