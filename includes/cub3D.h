@@ -48,6 +48,8 @@ void	fill_wall(t_map *map, char *path_map);
 /*utils_parse.c*/
 void	ft_search_first(int fd, int height);
 
+void    ft_help_argv(char *error);
+
 void	init_map(t_map *map, char *path);
 
 
