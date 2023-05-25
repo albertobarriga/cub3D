@@ -1,21 +1,22 @@
 NAME = cub3D
 LIBFT = libft/libft.a
-CC = gcc
+CC = gcc -g3
 CFLAGS = -Wall -Werror -Wextra
 SRC = 	src/main.c \
 		src/exit.c \
 	 	src/parser/parser.c \
-	 	src//parser/init.c \
-	 	src//parser/utils_parser.c \
-	 	src//parser/utils_init.c \
-		src/raycaster/init_raycaster.c 
+	 	src/parser/init.c \
+	 	src/parser/utils_parser.c \
+	 	src/parser/utils_init.c \
+		src/raycaster/init_raycaster.c \
+	 	src/checker/error.c
 
 LIBM = MLX42/libmlx42.a
 
 ifeq ($(USER), abarriga)
-	GLFW = -I include -lglfw -L /sgoinfre/goinfre/Perso/abarriga/homebrew/Cellar/glfw/3.3.8/lib
+	GLFW = -I include -lglfw -L /sgoinfre/goinfre/Perso/${USER}/homebrew/Cellar/glfw/3.3.8/lib
 else
-	GLFW = -I include -lglfw -L /opt/homebrew/opt/glfw/lib
+	GLFW = -I include -lglfw -L /opt/homebrew/opt/glfw/lib -L /sgoinfre/goinfre/Perso/${USER}/homebrew/Cellar/glfw/3.3.8/lib
 endif
 # Mac 42
 # GLFW = -I include -lglfw -L /sgoinfre/goinfre/Perso/abarriga/homebrew/Cellar/glfw/3.3.8/lib

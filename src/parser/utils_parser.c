@@ -6,7 +6,7 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 04:42:51 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/21 06:54:22 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/25 15:40:14 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,15 @@ void ft_search_first(int fd, int height)
  * @param path_map ruta del mapa seleccionado
  * @param map estructura para guardar las medidas del mapa
  */
-void    height_map(char *path_map, t_map *map)
+void	height_map(char *path_map, t_map *map)
 {
 	int		fd;
 	char	*m_map;
-	//int		first_line;
 
 	fd = open(path_map, O_RDONLY);
 	map->height = 0;
 	if (fd < 0 || !path_map)
 		return ;
-	//first_line = first_line_map(fd);
 	fd = open(path_map, O_RDONLY);
 	m_map = get_next_line(fd);
 	while (m_map)
@@ -74,13 +72,13 @@ int	first_line_map(int fd, t_map *map)
 		i = -1;
 		while (line[++i])
 		{
-			if ((line[i] != '1' && line[i] != '\t'  && line[i] != ' '))
+			if ((line[i] != '1' && line[i] != '\t' && line[i] != ' '))
 				break ;
 			found = 1;
 		}
-			free(line);
+		free(line);
 			line = get_next_line(fd);
-		if(found)
+		if (found)
 			return (free(line), map->start_map);
 	}
 	return (close(fd), map->start_map);
@@ -92,10 +90,10 @@ int	first_line_map(int fd, t_map *map)
  * @param map estructura del mapa
  * @param map ruta del mapa seleccionado
  */
-void    width_map(char *path_map, t_map	*map)
+void	width_map(char *path_map, t_map	*map)
 {
-    int		fd;
-    int		first_line;
+	int		fd;
+	int		first_line;
 	char	*m_map;
 
 	fd = open(path_map, O_RDONLY);
