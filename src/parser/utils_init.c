@@ -6,11 +6,24 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 06:55:19 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/21 07:14:35 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/25 16:25:25 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
+
+/**
+ * @brief Chequea que sea un carater valido
+ * 
+ * @param c caracter a chequear
+ * @return int 0 si no es valido 1 si lo es
+ */
+/* static int	is_char_valid(char c)
+{
+	if (c == '1' || c == '0' || c == ' ')
+		return (1);
+	return (0);
+} */
 
 /**
  * @brief reserva memoria y rellena una matriz guardando un punto
@@ -28,8 +41,7 @@ char	**loop_fill_map(t_map *map, int fd)
 	char	*line;
 
 	height = -1;
-	
-	map_fill = malloc(sizeof(char*) * map->height);
+	map_fill = malloc(sizeof(char *) * map->height);
 	while (++height < map->height - 1)
 	{
 		map_fill[height] = ft_calloc(sizeof(char), map->width);
@@ -54,7 +66,7 @@ char	**loop_fill_map(t_map *map, int fd)
  * @param map estructura del mapa
  * @param path_map ruta del mapa seleccionado
  */
-char **fill_map(char *path_map, t_map *map)
+char	**fill_map(char *path_map, t_map *map)
 {
 	char	**map_fill;
 	int		fd;
@@ -65,61 +77,4 @@ char **fill_map(char *path_map, t_map *map)
 	ft_search_first(fd, map->start_map);
 	map_fill = loop_fill_map(map, fd);
 	return (map_fill);
-}
-
-/**
- * @brief recogge la ruta de la im,agen a cargar
- * 
- * @param wall 
- * @param line 
- * @return char* 
- */
-char	*save_struct_walls(char *line)
-{
-	int		i;
-	int		j;
-	char	*path;
-
-	i = 0;
-	j = 0;
-
-	while (line[i] != '.' && !ft_isdigit(line[i]))
-		i++;
-	path = calloc(sizeof(char), (ft_strlen(line) - i));
-	while (line[i] && line[i] != '\n')
-	{
-		path[j] = line[i];
-		j++;
-		i++;
-	}
-	return (path);
-}
-
-void	fill_wall(t_map *map, char *path_map)
-{
-	int		fd;
-	int		i;
-	char	*line;
-
-	i = -1;
-	fd = open(path_map, O_RDONLY);
-	if (fd < 0)
-		return ;
-	while (++i <= map->height)
-	{
-		line = get_next_line(fd);
-		if (ft_strnstr(line, "NO", 2))
-			map->NO = save_struct_walls(line);
-		else if (ft_strnstr(line, "SO", 2))
-			map->SO = save_struct_walls(line);
-		else if (ft_strnstr(line, "WE", 2))
-			map->WE = save_struct_walls(line);
-		else if (ft_strnstr(line, "EA", 2))
-			map->EA = save_struct_walls(line);
-		else if (ft_strnstr(line, "F", 1))
-			map->F = save_struct_walls(line);
-		else if (ft_strnstr(line, "C", 1))
-			map->C = save_struct_walls(line);
-		free(line);
-	}
 }

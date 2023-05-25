@@ -1,6 +1,6 @@
 NAME = cub3D
 LIBFT = libft/libft.a
-CC = gcc
+CC = gcc -g3
 CFLAGS = -Wall -Werror -Wextra
 SRC = 	src/main.c \
 	 	src/parser/parser.c \
@@ -23,6 +23,10 @@ endif
 # GLFW = -I include -lglfw -L /opt/homebrew/opt/glfw/lib
 
 
+	 	src/parser/init.c \
+	 	src/parser/utils_parser.c \
+	 	src/parser/utils_init.c \
+	 	src/checker/error.c \
 
 AUTHOR = jlimones / abarriga
 DATE = 18/05/2023

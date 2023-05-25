@@ -10,21 +10,29 @@
 # define WIDTH 1920
 # define HEIGHT 1080
 
+typedef struct s_pj
+{
+
+	char	orientation;
+	int		y;
+	int		x;
+}	t_pj;
+
 typedef struct s_map
 {
-	int		width; //ancho del mapa
-	int		height; //alto del mapa
-	int		start_map; //linea en la que empieza el mapa en el archivo
-	char	**map_fill; //matriz que contiene el mapa
-	char	*NO; //contiene ruta a la imagen a cargar
-	char	*SO; //contiene ruta a la imagen a cargar
-	char	*WE; //contiene ruta a la imagen a cargar
-	char	*EA; //contiene ruta a la imagen a cargar
-	char	*C; //contiene los colores del techo
-	char	*F; // contiene los collores del suelo
-	char	orientation; // Falta por rellenar
+	int		width;
+	int		height;
+	int		start_map;
+	char	**map_fill;
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	char	*c;
+	char	*f;
+	uint32_t	ceiling_color;
+	uint32_t	floor_color;
 }	t_map;
-
 typedef struct s_args
 {
 	mlx_t		*mlx;
@@ -38,7 +46,7 @@ int		first_line_map(int fd, t_map *map);
 void	fill_wall(t_map *map, char *path_map);
 
 /*utils_parse.c*/
-void 	ft_search_first(int fd, int height);
+void	ft_search_first(int fd, int height);
 
 void	init_map(t_map *map, char *path);
 
