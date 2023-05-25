@@ -62,11 +62,9 @@ void	print_back(t_args *args, t_map *map)
 		while (i < WIDTH)
 		{
 			if (j < mid_height)
-				mlx_put_pixel(args->back, i, j, 0x0000FFFF);
-				// mlx_put_pixel(args->back, i, j, map->F);
+				mlx_put_pixel(args->back, i, j, map->floor_color);
 			else
-				mlx_put_pixel(args->back, i, j, 0x800000FF);
-				// mlx_put_pixel(args->back, i, j, map->C);
+				mlx_put_pixel(args->back, i, j, map->ceilling_color);
 			i++;
 		}
 		j++;
@@ -80,8 +78,6 @@ void	mlx_load_text(t_args *args, t_map *map)
 	args->so_text = mlx_load_png(map->SO);
 	args->we_text = mlx_load_png(map->WE);
 	args->ea_text = mlx_load_png(map->EA);
-	// args->no_text = mlx_load_png("../../pics/face.png");
-	// printf("text norte= %s\n", map->NO);
 	if (!args->no_text || !args->so_text || !args->we_text || !args->ea_text)
 		exit_cub(args);
 	

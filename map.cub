@@ -1,13 +1,13 @@
-NO ./pics/face.png
+NO ./pics/wall1.png
 
 
 
 
 
-WE ./pics/pantera.png
-SO ./pics/glasses.png
+WE ./pics/wall.png
+SO ./pics/wall2.png
 
-EA ./pics/sonic.png
+EA ./pics/wall3.png
 
 C 3,173,252
 
