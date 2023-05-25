@@ -6,17 +6,46 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:15:12 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/22 17:59:44 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/25 16:45:47 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
+void	init_color(t_map *map)
+{
+	char	**colors;
+	int		i;
+	unsigned char	rgb[3];
+
+	colors = ft_split(map->c, ',');
+	i = -1;
+	while (colors[++i])
+	{
+		rgb[i] = (unsigned char)ft_atoi(colors[i]);
+		free(colors[i]);
+	}
+	map->ceiling_color = (rgb[0] << 24) | (rgb[1] << 16) | (rgb[2] << 8) | 255;
+	free(colors);
+	colors = ft_split(map->f, ',');
+	i = -1;
+	while (colors[++i])
+	{
+		rgb[i] = (unsigned char)ft_atoi(colors[i]);
+		free(colors[i]);
+	}
+	free(colors);
+	map->floor_color = (rgb[0] << 24) | (rgb[1] << 16) | (rgb[2] << 8) | 255;
+}
+
 void	init_map(t_map *map, char *path)
 {
 	width_map(path, map);
 	map->map_fill = fill_map(path, map);
-    fill_wall(map, path);
+	fill_wall(map, path);
+	map->floor_color = 0;
+	map->ceiling_color = 0;
+	init_color(map);
 }
 
 /**
@@ -61,17 +90,17 @@ void	fill_wall(t_map *map, char *path_map)
 	{
 		line = get_next_line(fd);
 		if (ft_strnstr(line, "NO", 2))
-			map->NO = save_struct_walls(line);
+			map->no = save_struct_walls(line);
 		else if (ft_strnstr(line, "SO", 2))
-			map->SO = save_struct_walls(line);
+			map->so = save_struct_walls(line);
 		else if (ft_strnstr(line, "WE", 2))
-			map->WE = save_struct_walls(line);
+			map->we = save_struct_walls(line);
 		else if (ft_strnstr(line, "EA", 2))
-			map->EA = save_struct_walls(line);
+			map->ea = save_struct_walls(line);
 		else if (ft_strnstr(line, "F", 1))
-			map->F = save_struct_walls(line);
+			map->f = save_struct_walls(line);
 		else if (ft_strnstr(line, "C", 1))
-			map->C = save_struct_walls(line);
+			map->c = save_struct_walls(line);
 		free(line);
 	}
 }

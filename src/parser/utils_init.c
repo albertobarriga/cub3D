@@ -6,11 +6,24 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 06:55:19 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/24 08:45:33 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/25 16:25:25 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
+
+/**
+ * @brief Chequea que sea un carater valido
+ * 
+ * @param c caracter a chequear
+ * @return int 0 si no es valido 1 si lo es
+ */
+/* static int	is_char_valid(char c)
+{
+	if (c == '1' || c == '0' || c == ' ')
+		return (1);
+	return (0);
+} */
 
 /**
  * @brief reserva memoria y rellena una matriz guardando un punto
@@ -28,8 +41,7 @@ char	**loop_fill_map(t_map *map, int fd)
 	char	*line;
 
 	height = -1;
-	
-	map_fill = malloc(sizeof(char*) * map->height);
+	map_fill = malloc(sizeof(char *) * map->height);
 	while (++height < map->height - 1)
 	{
 		map_fill[height] = ft_calloc(sizeof(char), map->width);
@@ -54,7 +66,7 @@ char	**loop_fill_map(t_map *map, int fd)
  * @param map estructura del mapa
  * @param path_map ruta del mapa seleccionado
  */
-char **fill_map(char *path_map, t_map *map)
+char	**fill_map(char *path_map, t_map *map)
 {
 	char	**map_fill;
 	int		fd;
@@ -65,21 +77,4 @@ char **fill_map(char *path_map, t_map *map)
 	ft_search_first(fd, map->start_map);
 	map_fill = loop_fill_map(map, fd);
 	return (map_fill);
-}
-
-int count_letters(t_map *map)
-{
-    int i;
-    int j;
-
-    i = map->start_map - 1;
-    while (++i <= map->height)
-    {
-        j = -1;
-        while (++j <= map->width)
-        {
-            if (map->map_fill[i][j])
-        }
-    }
-    
 }

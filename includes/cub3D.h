@@ -10,24 +10,25 @@
 typedef struct s_pj
 {
 
-	char	orientation; // orientacion inicial
-	int		y; //posicion Y inicial
-	int		x; //posicion X inicial
-	
+	char	orientation;
+	int		y;
+	int		x;
 }	t_pj;
 
 typedef struct s_map
 {
-	int		width; //ancho del mapa
-	int		height; //alto del mapa
-	int		start_map; //linea en la que empieza el mapa en el archivo
-	char	**map_fill; //matriz que contiene el mapa
-	char	*NO; //contiene ruta a la imagen a cargar
-	char	*SO; //contiene ruta a la imagen a cargar
-	char	*WE; //contiene ruta a la imagen a cargar
-	char	*EA; //contiene ruta a la imagen a cargar
-	char	*C; //contiene los colores del techo
-	char	*F; // contiene los colores del suelo
+	int		width;
+	int		height;
+	int		start_map;
+	char	**map_fill;
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	char	*c;
+	char	*f;
+	uint32_t	ceiling_color;
+	uint32_t	floor_color;
 }	t_map;
 
 void	width_map(char *path_map, t_map	*map);
@@ -37,10 +38,10 @@ int		first_line_map(int fd, t_map *map);
 void	fill_wall(t_map *map, char *path_map);
 
 /*utils_parse.c*/
-void 	ft_search_first(int fd, int height);
+void	ft_search_first(int fd, int height);
 
 void	init_map(t_map *map, char *path);
 
 
-void    ft_help_argv(char *error);
+void	ft_help_argv(char *error);
 #endif 

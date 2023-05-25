@@ -1,6 +1,6 @@
 NAME = cub3D
 LIBFT = libft/libft.a
-CC = gcc
+CC = gcc -g3
 CFLAGS = -Wall -Werror -Wextra
 SRC = 	src/main.c \
 	 	src/parser/parser.c \

@@ -6,29 +6,33 @@ void	leaks(void)
 }
 
 
-void print_matrix(char **matrix)
+void	print_matrix(char **matrix)
 {
-	int i = -1;
-	while(matrix[++i])
+	int	i;
+
+	i = -1;
+	while (matrix[++i])
 		printf("%s\n", matrix[i]);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    t_map		map;
+	t_map	map;
 
-    if (argc != 2)
-        ft_help_argv("insufficient arguments\n");
-    init_map(&map, argv[1]);
+	//atexit(leaks);
+	if (argc != 2)
+		ft_help_argv("insufficient arguments\n");
+	init_map(&map, argv[1]);
 	print_matrix(map.map_fill);
-    printf("start_map  %i\n", map.start_map);
-    printf("NO  %s\n", map.NO);
-    printf("WE   %s\n", map.WE);
-    printf("EA   %s\n", map.EA);
-    printf("SO   %s\n", map.SO);
-    printf("F    %s\n", map.F);
-    printf("C    %s\n", map.C);
-    leaks();
+	printf("start_map  %i\n", map.start_map);
+	printf("NO  %s\n", map.no);
+	printf("WE   %s\n", map.we);
+	printf("EA   %s\n", map.ea);
+	printf("SO   %s\n", map.so);
+	printf("F    %s\n", map.f);
+	printf("C    %s\n", map.c);
+	printf("F color    %x\n", map.floor_color);
+	printf("C color   %x\n", map.ceiling_color);
 }
 
 
