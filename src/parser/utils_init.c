@@ -6,7 +6,7 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 06:55:19 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/25 19:14:50 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/26 16:39:54 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ char	**loop_fill_map(t_map *map, int fd)
 		}
 		free(line);
 	}
+	map_fill[height] = NULL;
 	return (close(fd), map_fill);
 }
 

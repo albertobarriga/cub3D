@@ -6,7 +6,7 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 04:42:51 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/25 18:18:40 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/26 16:39:24 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	width_map(char *path_map, t_map	*map)
 	{
 		if (map->width < (int)ft_strlen(m_map))
 			map->width = (int)ft_strlen(m_map);
-			map->height++;
+		map->height++;
 		m_map = get_next_line(fd);
 		free(m_map);
 	}
