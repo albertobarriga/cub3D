@@ -6,7 +6,7 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 04:42:51 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/26 16:39:24 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/27 13:34:14 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,32 +22,6 @@ void	ft_search_first(int fd, int height)
 		free(line);
 		height--;
 	}
-}
-
-/**
- * @brief Guarda el  total de las lineas del archivo .cub
- * 
- * @param path_map ruta del mapa seleccionado
- * @param map estructura para guardar las medidas del mapa
- */
-void	height_map(char *path_map, t_map *map)
-{
-	int		fd;
-	char	*m_map;
-
-	fd = open(path_map, O_RDONLY);
-	map->height = 0;
-	if (fd < 0 || !path_map)
-		return ;
-	fd = open(path_map, O_RDONLY);
-	m_map = get_next_line(fd);
-	while (m_map)
-	{
-		free(m_map);
-		m_map = get_next_line(fd);
-		map->height++;
-	}
-	close(fd);
 }
 
 /**

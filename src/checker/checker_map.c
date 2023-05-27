@@ -6,7 +6,7 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 18:09:11 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/27 13:15:58 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/27 13:33:03 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	is_char_valid_pj(char c)
  * @param path_map ruta al archivo del mapa
  * @return int 1 si es valido, 0 si no lo es
  */
-int	checker_char_map(char *path_map, t_map *map, int fd)
+int	checker_char_map(t_map *map, int fd)
 {
 	int		i;
 	int		j;
@@ -49,8 +49,6 @@ int	checker_char_map(char *path_map, t_map *map, int fd)
 	count = 0;
 	j = -1;
 	line = get_next_line(fd);
-	if (fd < 0 || !path_map)
-		return (0);
 	while (++j < map->height - 1)
 	{
 		i = -1;
@@ -64,6 +62,8 @@ int	checker_char_map(char *path_map, t_map *map, int fd)
 		free(line);
 		line = get_next_line(fd);
 	}
+	if (count == 0)
+		return (close(fd), free(line), 0);
 	return (close(fd), free(line), 1);
 }
 
@@ -73,7 +73,7 @@ int	checker_map(char *path_map, t_map *map)
 
 	fd = open(path_map, O_RDONLY);
 	ft_search_first(fd, map->start_map);
-	if (checker_char_map(path_map, map, fd))
+	if (checker_char_map(map, fd))
 		return (0);
 	return (1);
 }

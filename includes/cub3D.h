@@ -12,7 +12,6 @@
 
 typedef struct s_pj
 {
-
 	char	orientation;
 	int		y;
 	int		x;
@@ -20,16 +19,16 @@ typedef struct s_pj
 
 typedef struct s_map
 {
-	int		width;
-	int		height;
-	int		start_map;
-	char	**map_fill;
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
-	char	*c;
-	char	*f;
+	int			width;
+	int			height;
+	int			start_map;
+	char		**map_fill;
+	char		*no;
+	char		*so;
+	char		*we;
+	char		*ea;
+	char		*c;
+	char		*f;
 	uint32_t	ceiling_color;
 	uint32_t	floor_color;
 }	t_map;
@@ -47,7 +46,6 @@ typedef struct s_args
 
 void	width_map(char *path_map, t_map	*map);
 char	**fill_map(char *_path_map, t_map *map);
-void    height_map(char *path_map, t_map *map);/*Funcion para revisar map->height lo guarda la funcion anterior*/
 int		first_line_map(int fd, t_map *map);
 void	fill_wall(t_map *map, char *path_map);
 
@@ -58,9 +56,9 @@ void	ft_search_first(int fd, int height);
 void	ft_help_argv(char *error);
 void	ft_help_map(char *error);
 int		is_char_valid(char c);
-int		checker_char_map(char *path_map, t_map *map, int fd);
+int		checker_char_map(t_map *map, int fd);
 int		checker_map(char *path_map, t_map *map);
-
+int		checker_path_map(char *path_map);
 void	init_map(t_map *map, char *path);
 
 // RAYCASTER

@@ -6,7 +6,7 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:15:12 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/25 19:28:33 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/27 13:29:35 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ char	*save_struct_walls(char *line)
 
 	i = 0;
 	j = 0;
-
 	while (line[i] != '.' && !ft_isdigit(line[i]))
 		i++;
 	path = calloc(sizeof(char), (ft_strlen(line) - i));
