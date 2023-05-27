@@ -6,7 +6,7 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 18:09:11 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/27 13:33:03 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/27 16:00:24 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	is_char_valid(char c)
 	return (0);
 }
 
-int	is_char_valid_pj(char c)
+int	is_char_valid_player(char c)
 {
 	if (c == 'S' || c == 'N' || c == 'W' || c == 'E')
 		return (1);
@@ -56,7 +56,7 @@ int	checker_char_map(t_map *map, int fd)
 		{
 			if (!is_char_valid(line[i]) || count > 1)
 				return (free(line), 0);
-			if (is_char_valid_pj(line[i]))
+			if (is_char_valid_player(line[i]))
 				count++;
 		}
 		free(line);

@@ -35,26 +35,35 @@ void	free_struct_map(t_map *map)
 	free(map->no);
 }
 
+void	checker_errors_and_init(char *path_map, t_map *map)
+{
+	int	fd;
+
+	if (checker_path_map(path_map))
+		ft_help_argv("\033[0;31mError:\n supported file\n");
+	fd = open(path_map, O_RDONLY);
+	if (fd < 0)
+	{
+		close(fd);
+		ft_help_argv("\033[0;31mError:\n invalid file\n");
+	}
+	close(fd);
+	init_map(map, path_map);
+	if (checker_map(path_map, map))
+		ft_help_map("Error:\n unsupported character\n");
+	if (!checker_colors(map->f) || !checker_colors(map->c))
+		ft_help_colors("Error:\n unsupported colors\n");
+}
+
 int	main(int argc, char **argv)
 {
 	atexit(leaks);
 	t_map	map;
-	int		fd;
 	//t_args		args;
+
 	if (argc != 2)
 		ft_help_argv("\033[0;31mError: unsupported arguments\n");
-	if (checker_path_map(argv[1]))
-		ft_help_argv("\033[0;31mError: supported file\n");
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
-	{
-		close(fd);
-		ft_help_argv("\033[0;31mError: invalid file\n");
-	}
-	close(fd);
-	init_map(&map, argv[1]);
-	if (checker_map(argv[1], &map))
-		ft_help_map("Error: unsupported character\n");
+	checker_errors_and_init(argv[1], &map);
 	// printf("height = %i\n", map.height);
 	// printf("width = %i\n", map.width);
 	// printf("start_map  %i\n", map.start_map);
@@ -64,9 +73,9 @@ int	main(int argc, char **argv)
 	// printf("SO   %s\n", map.so);
 	// printf("F    %s\n", map.f);
 	// printf("C    %s\n", map.c);
+	// printf("F color    %x\n", map.floor_color);
+	// printf("C color   %x\n", map.ceiling_color);
 	print_matrix(map.map_fill);
-	printf("F color    %x\n", map.floor_color);
-	printf("C color   %x\n", map.ceiling_color);
 	// init_args_mlx(&args);
 	// init_args(&args, &map);
 	// mlx_loop(args.mlx);

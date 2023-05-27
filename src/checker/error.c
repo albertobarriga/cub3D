@@ -6,7 +6,7 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 10:10:54 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/27 14:55:24 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/27 15:56:11 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,13 @@ void	ft_help_argv(char *error)
 {
 	ft_putstr_fd(error, 2);
 	ft_putstr_fd("\033[0;31m	help: ./cub3D [xxxx.cub]\n", 2);
+	exit(0);
+}
+
+void	ft_help_colors(char *error)
+{
+	ft_putstr_fd(error, 2);
+	ft_putstr_fd("\033[0;31m	help: [F][C] xxx,xxx,xxx\n", 2);
 	exit(0);
 }
 

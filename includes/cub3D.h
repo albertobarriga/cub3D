@@ -44,21 +44,29 @@ typedef struct s_args
 	t_map			*map;
 }	t_args;
 
-void	width_map(char *path_map, t_map	*map);
+/**/
 char	**fill_map(char *_path_map, t_map *map);
-int		first_line_map(int fd, t_map *map);
 void	fill_wall(t_map *map, char *path_map);
 
 /*utils_parse.c*/
+void	width_map(char *path_map, t_map	*map);
 void	ft_search_first(int fd, int height);
+int		first_line_map(int fd, t_map *map);
 
-/*checker*/
+/*error.c*/
+void	ft_help_colors(char *error);
 void	ft_help_argv(char *error);
 void	ft_help_map(char *error);
+
+/*checker_map.c*/
 int		is_char_valid(char c);
 int		checker_char_map(t_map *map, int fd);
 int		checker_map(char *path_map, t_map *map);
+
+/*checker_elements.c*/
 int		checker_path_map(char *path_map);
+int		checker_colors(char *str);
+
 void	init_map(t_map *map, char *path);
 
 // RAYCASTER
