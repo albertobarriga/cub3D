@@ -46,7 +46,7 @@ int	main(int argc, char **argv)
 		ft_help_argv("supported arguments\n");
 	init_map(&map, argv[1]);
 	if (checker_map(argv[1], &map))
-		ft_help_argv("unsupported character\n");
+		ft_help_map("unsupported character\n");
 	// printf("height = %i\n", map.height);
 	// printf("width = %i\n", map.width);
 	// printf("start_map  %i\n", map.start_map);

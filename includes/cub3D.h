@@ -56,6 +56,7 @@ void	ft_search_first(int fd, int height);
 
 /*checker*/
 void	ft_help_argv(char *error);
+void	ft_help_map(char *error);
 int		is_char_valid(char c);
 int		checker_char_map(char *path_map, t_map *map, int fd);
 int		checker_map(char *path_map, t_map *map);
