@@ -70,6 +70,7 @@ typedef struct s_args
 	mlx_t			*mlx;
 	mlx_image_t		*img;
 	mlx_image_t		*back;
+	mlx_image_t		*walls;
 	mlx_texture_t	*no_text;
 	mlx_texture_t	*so_text;
 	mlx_texture_t	*we_text;

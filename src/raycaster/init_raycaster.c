@@ -19,10 +19,11 @@ void	init_args_mlx(t_args *args)
 void	init_args(t_args *args, t_map *map)
 {
 	mlx_load_text(args, map);
-	mlx_loop_hook(args->mlx, &hook, args);
 
+	mlx_loop_hook(args->mlx, &hook, args);
 	// mlx_set_cursor_mode(args->mlx, MLX_MOUSE_DISABLED);
 	print_back(args, map);
+	printf("hola\n");
 	init_player(map);
 	print_walls(args, map, map->player);
 	// mlx_get_time;
@@ -31,12 +32,14 @@ void	init_args(t_args *args, t_map *map)
 
 void	init_player(t_map	*map)
 {
+	map->player = malloc(sizeof(t_player));
+	printf("pj x = %d\n", map->pj->x);
+	printf("orie = %c\n", map->pj->orientation);
 	map->player->x = map->pj->x;
 	map->player->y = map->pj->y;
 	map->player->planex = 0;
 	map->player->planey = 0.66;
 
-	printf("orie = %c/n", map->pj->orientation);
 	if (map->pj->orientation == 'N')
 		map->player->diry = 1;
 	else if (map->pj->orientation == 'S')
@@ -106,13 +109,15 @@ void	print_walls(t_args *args, t_map *map, t_player *pl)
 {
 	int	x;
 
+	args->walls = mlx_new_image(args->mlx, WIDTH, HEIGHT);
 	x = 0;
-
 	while (x < WIDTH)
 	{
-		pl->camerax = 2 * x / WIDTH - 1;
+		pl->camerax = 2 * x / (double)WIDTH - 1;
+		printf("x: %d, camara: %f\n", x, pl->camerax);
 		pl->raydirx = pl->dirx + pl->planex * pl->camerax;
 		pl->raydiry = pl->diry + pl->planey * pl->camerax;
+		printf("rayx: %f, rayy: %f\n", pl->raydirx, pl->raydiry);
 		pl->mapx = (int)(pl->x);
 		pl->mapy = (int)(pl->y);
 		if (pl->dirx == 0)
@@ -136,13 +141,13 @@ void	print_walls(t_args *args, t_map *map, t_player *pl)
 		}
 		if (pl->raydiry < 0)
 		{
-			pl->stepx = -1;
-			pl->sidedistx = (pl->y - pl->mapy) * pl->deltadisty;
+			pl->stepy = -1;
+			pl->sidedisty = (pl->y - pl->mapy) * pl->deltadisty;
 		}
 		else
 		{
-			pl->stepx = 1;
-			pl->sidedistx = (pl->mapy + 1.0 - pl->y) * pl->deltadisty;
+			pl->stepy = 1;
+			pl->sidedisty = (pl->mapy + 1.0 - pl->y) * pl->deltadisty;
 		}
 		pl->hit = 0;
 		while (pl->hit == 0)
@@ -150,23 +155,30 @@ void	print_walls(t_args *args, t_map *map, t_player *pl)
 			if (pl->sidedistx < pl->sidedisty)
 			{
 				pl->sidedistx += pl->sidedistx;
+				// printf("stepx = %d\n", pl->stepx);
 				pl->mapx += pl->stepx;
 				pl->side = 0;
 			}
 			else
 			{
+				// printf("stepy = %d\n", pl->stepy);
 				pl->sidedisty += pl->sidedisty;
+				// printf("x = %d y = %d\n", pl->mapx, pl->mapy);
 				pl->mapy += pl->stepy;
+				// printf("fuaaaax = %d y = %d\n", pl->mapx, pl->mapy);
 				pl->side = 1;
 			}
-			if (map->map_fill[pl->mapx][pl->mapy] > 0)
+			//printf("x = %d y = %d, map: %c\n", pl->mapx, pl->mapy, map->map_fill[pl->mapy][pl->mapx]);
+			if (map->map_fill[pl->mapy][pl->mapx] != '0')
 				pl->hit = 1;
 		}
+		// printf("sdx: %f, sdy: %f, ddx: %f, ddy: %f\n", pl->sidedistx, pl->sidedisty, pl->deltadistx, pl->deltadisty);
 		if (pl->side == 0)
-			pl->perpwalldist = pl-> sidedistx - pl->deltadistx;
+			pl->perpwalldist = pl->sidedistx - pl->deltadistx;
 		else
-			pl->perpwalldist = pl-> sidedisty - pl->deltadisty;
-		pl->lineheight = (int)(HEIGHT / pl->perpwalldist);
+			pl->perpwalldist = pl->sidedisty - pl->deltadisty;
+		pl->lineheight = (int)(HEIGHT / (pl->perpwalldist / 300));
+		// printf("lineheight: %d, perpwalldist: %f\n", pl->lineheight, pl->perpwalldist);
 		pl->drawstart = -pl->lineheight / 2 + HEIGHT / 2;
 		if (pl->drawstart < 0)
 			pl->drawstart = 0;
@@ -176,13 +188,16 @@ void	print_walls(t_args *args, t_map *map, t_player *pl)
 		print_vert_line(x, pl->drawstart, pl->drawend, 0xFBAED2FF, args);
 		x++;
 	}
+	mlx_image_to_window(args->mlx, args->walls, 0, 0);
 }
 
 void	print_vert_line(int x, int ystart, int yend, int color, t_args *args)
 {
+	
+	// printf("raya x: %d, y0: %d, y1: %d\n", x, ystart, yend);
 	while(ystart <= yend)
 	{		
-		mlx_put_pixel(args->img, x, ystart, color);
+		mlx_put_pixel(args->walls, x, ystart, color);
 		ystart++;
 	}
 }
