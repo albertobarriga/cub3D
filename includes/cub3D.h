@@ -7,6 +7,7 @@
 # include <stdio.h>
 # include <string.h>
 # include <stdlib.h>
+# include <math.h>
 # define WIDTH 900
 # define HEIGHT 600
 
@@ -18,20 +19,50 @@ typedef struct s_pj
 	int		x;
 }	t_pj;
 
+typedef struct s_player
+{
+	double	x;
+	double	y;
+	double	dirx;
+	double	diry;
+	double	planex;
+	double	planey;
+	double	camerax;
+	double	raydirx;
+	double	raydiry;
+	int		mapx;
+	int		mapy;
+	double	sidedistx;
+	double	sidedisty;
+	double	deltadistx;
+	double	deltadisty;
+	int		stepx;
+	int		stepy;
+	double	perpwalldist;
+	int		hit;
+	int		side;
+	int		lineheight;
+	int		drawstart;
+	int		drawend;
+
+}	t_player;
+
 typedef struct s_map
 {
-	int		width;
-	int		height;
-	int		start_map;
-	char	**map_fill;
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
-	char	*c;
-	char	*f;
+	int			width;
+	int			height;
+	int			start_map;
+	char		**map_fill;
+	char		*no;
+	char		*so;
+	char		*we;
+	char		*ea;
+	char		*c;
+	char		*f;
 	uint32_t	ceiling_color;
 	uint32_t	floor_color;
+	t_pj		*pj;
+	t_player	*player;
 }	t_map;
 typedef struct s_args
 {
@@ -65,5 +96,8 @@ void	hook(void *param);
 void	print_back(t_args *args, t_map *map);
 void	mlx_load_text(t_args *args, t_map *map);
 void	exit_cub(t_args *args);
+void	print_vert_line(int x, int ystart, int yend, int color, t_args *args);
+void	print_walls(t_args *args, t_map *map, t_player *pl);
+void	init_player(t_map	*map);
 
 #endif 
