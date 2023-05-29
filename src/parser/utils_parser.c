@@ -6,7 +6,7 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 04:42:51 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/29 17:07:52 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/29 19:30:48 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,24 @@ void	width_map(char *path_map, t_map	*map)
 		free(m_map);
 	}
 	close(fd);
+}
+
+void	search_x_y(t_map *map)
+{
+	int	y;
+	int	x;
+
+	y = -1;
+	while (map->map_fill[++y])
+	{
+		x = -1;
+		while (map->map_fill[y][++x])
+		{
+			if (map->map_fill[y][x] == map->pj->orientation)
+			{
+				map->pj->y = y;
+				map->pj->x = x;
+			}
+		}
+	}
 }

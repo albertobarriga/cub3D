@@ -32,6 +32,7 @@ typedef struct s_map
 	char		*f;
 	uint32_t	ceiling_color;
 	uint32_t	floor_color;
+	t_pj		*pj;
 }	t_map;
 
 typedef struct s_args
@@ -55,6 +56,7 @@ int		file_fill( char *path, t_map *map);
 void	width_map(char *path_map, t_map	*map);
 void	ft_search_first(int fd, int height);
 int		first_line_map(int fd, t_map *map);
+void	search_x_y(t_map *map);
 
 /*error.c*/
 void	ft_help_colors(char *error);

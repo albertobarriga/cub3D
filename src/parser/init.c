@@ -6,7 +6,7 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:15:12 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/29 17:24:07 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/29 18:54:48 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	init_map(t_map *map, char *path)
 	map->ea = 0;
 	map->c = 0;
 	map->f = 0;
+	map->pj = ft_calloc(sizeof(t_pj), 1);
 	width_map(path, map);
 	map->map_fill = fill_map(path, map);
 	fill_wall(map, path);

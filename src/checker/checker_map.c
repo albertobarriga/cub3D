@@ -6,7 +6,7 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 18:09:11 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/29 17:06:41 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/29 18:25:15 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,10 @@ int	checker_char_map(t_map *map, int fd)
 			if (!is_char_valid(line[i]) || count > 1)
 				return (free(line), 0);
 			if (is_char_valid_player(line[i]))
+			{
+				map->pj->orientation = line[i];
 				count++;
+			}
 		}
 		free(line);
 		line = get_next_line(fd);
