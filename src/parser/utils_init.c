@@ -6,24 +6,11 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 06:55:19 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/25 16:25:25 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/29 17:31:23 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
-
-/**
- * @brief Chequea que sea un carater valido
- * 
- * @param c caracter a chequear
- * @return int 0 si no es valido 1 si lo es
- */
-/* static int	is_char_valid(char c)
-{
-	if (c == '1' || c == '0' || c == ' ')
-		return (1);
-	return (0);
-} */
 
 /**
  * @brief reserva memoria y rellena una matriz guardando un punto
@@ -57,6 +44,7 @@ char	**loop_fill_map(t_map *map, int fd)
 		}
 		free(line);
 	}
+	map_fill[height] = NULL;
 	return (close(fd), map_fill);
 }
 
@@ -77,4 +65,33 @@ char	**fill_map(char *path_map, t_map *map)
 	ft_search_first(fd, map->start_map);
 	map_fill = loop_fill_map(map, fd);
 	return (map_fill);
+}
+
+int	file_fill(char *path, t_map *map)
+{
+	char	*line;
+	int		i;
+	int		x;
+	int		j;
+	int		fd;
+
+	j = -1;
+	i = -1;
+	fd = open(path, O_RDONLY);
+	map->file_fill = ft_calloc(sizeof(char *), 7);
+	line = get_next_line(fd);
+	while (++i < map->start_map - 1)
+	{
+		if (line[0] != '\n')
+		{
+			x = -1;
+			map->file_fill[++j] = ft_strdup(line);
+			while (map->file_fill[j][++x])
+				if (map->file_fill[j][x] == '\n')
+					map->file_fill[j][x] = '\0';
+		}	
+		free(line);
+		line = get_next_line(fd);
+	}
+	return (free(line), close(fd));
 }

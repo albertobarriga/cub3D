@@ -6,13 +6,13 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 04:42:51 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/25 15:40:14 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/29 19:30:48 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-void ft_search_first(int fd, int height)
+void	ft_search_first(int fd, int height)
 {
 	char	*line;
 
@@ -22,32 +22,6 @@ void ft_search_first(int fd, int height)
 		free(line);
 		height--;
 	}
-}
-
-/**
- * @brief Guarda el  total de las lineas del archivo .cub
- * 
- * @param path_map ruta del mapa seleccionado
- * @param map estructura para guardar las medidas del mapa
- */
-void	height_map(char *path_map, t_map *map)
-{
-	int		fd;
-	char	*m_map;
-
-	fd = open(path_map, O_RDONLY);
-	map->height = 0;
-	if (fd < 0 || !path_map)
-		return ;
-	fd = open(path_map, O_RDONLY);
-	m_map = get_next_line(fd);
-	while (m_map)
-	{
-		free(m_map);
-		m_map = get_next_line(fd);
-		map->height++;
-	}
-	close(fd);
 }
 
 /**
@@ -99,9 +73,9 @@ void	width_map(char *path_map, t_map	*map)
 	fd = open(path_map, O_RDONLY);
 	map->width = 0;
 	map->height = 0;
-	if (fd < 0 || !path_map)
-		return ;
 	first_line = first_line_map(fd, map);
+	if (map->start_map < 6)
+		ft_help_char_elements_map("Error:\n");
 	fd = open(path_map, O_RDONLY);
 	while (first_line-- > 1)
 	{
@@ -112,9 +86,29 @@ void	width_map(char *path_map, t_map	*map)
 	{
 		if (map->width < (int)ft_strlen(m_map))
 			map->width = (int)ft_strlen(m_map);
-			map->height++;
+		map->height++;
 		m_map = get_next_line(fd);
 		free(m_map);
 	}
 	close(fd);
+}
+
+void	search_x_y(t_map *map)
+{
+	int	y;
+	int	x;
+
+	y = -1;
+	while (map->map_fill[++y])
+	{
+		x = -1;
+		while (map->map_fill[y][++x])
+		{
+			if (map->map_fill[y][x] == map->pj->orientation)
+			{
+				map->pj->y = y;
+				map->pj->x = x;
+			}
+		}
+	}
 }

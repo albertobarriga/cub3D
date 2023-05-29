@@ -13,7 +13,6 @@
 
 typedef struct s_pj
 {
-
 	char	orientation;
 	int		y;
 	int		x;
@@ -53,6 +52,7 @@ typedef struct s_map
 	int			height;
 	int			start_map;
 	char		**map_fill;
+	char		**file_fill;
 	char		*no;
 	char		*so;
 	char		*we;
@@ -64,6 +64,7 @@ typedef struct s_map
 	t_pj		*pj;
 	t_player	*player;
 }	t_map;
+
 typedef struct s_args
 {
 	mlx_t			*mlx;
@@ -76,16 +77,31 @@ typedef struct s_args
 	t_map			*map;
 }	t_args;
 
-void	width_map(char *path_map, t_map	*map);
+/**/
 char	**fill_map(char *_path_map, t_map *map);
-void    height_map(char *path_map, t_map *map);/*Funcion para revisar map->height lo guarda la funcion anterior*/
-int		first_line_map(int fd, t_map *map);
 void	fill_wall(t_map *map, char *path_map);
+int		file_fill( char *path, t_map *map);
 
 /*utils_parse.c*/
+void	width_map(char *path_map, t_map	*map);
 void	ft_search_first(int fd, int height);
+int		first_line_map(int fd, t_map *map);
+void	search_x_y(t_map *map);
 
-void    ft_help_argv(char *error);
+/*error.c*/
+void	ft_help_colors(char *error);
+void	ft_help_argv(char *error);
+void	ft_help_map(char *error);
+void	ft_help_char_elements_map(char *error);
+
+/*checker_map.c*/
+int		is_char_valid(char c);
+int		checker_char_map(t_map *map, int fd);
+int		checker_map(char *path_map, t_map *map);
+
+/*checker_elements.c*/
+int		checker_path_map(char *path_map);
+int		checker_colors(char *str);
 
 void	init_map(t_map *map, char *path);
 
