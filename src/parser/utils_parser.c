@@ -6,7 +6,7 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 04:42:51 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/27 13:34:14 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/29 17:07:52 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void	width_map(char *path_map, t_map	*map)
 	map->width = 0;
 	map->height = 0;
 	first_line = first_line_map(fd, map);
+	if (map->start_map < 6)
+		ft_help_char_elements_map("Error:\n");
 	fd = open(path_map, O_RDONLY);
 	while (first_line-- > 1)
 	{

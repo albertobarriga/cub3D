@@ -6,7 +6,7 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 18:09:11 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/27 16:00:24 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/29 17:06:41 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	checker_map(char *path_map, t_map *map)
 	int	fd;
 
 	fd = open(path_map, O_RDONLY);
+
 	ft_search_first(fd, map->start_map);
 	if (checker_char_map(map, fd))
 		return (0);

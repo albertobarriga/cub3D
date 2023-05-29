@@ -6,7 +6,7 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 06:55:19 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/26 16:39:54 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/29 17:31:23 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,33 @@ char	**fill_map(char *path_map, t_map *map)
 	ft_search_first(fd, map->start_map);
 	map_fill = loop_fill_map(map, fd);
 	return (map_fill);
+}
+
+int	file_fill(char *path, t_map *map)
+{
+	char	*line;
+	int		i;
+	int		x;
+	int		j;
+	int		fd;
+
+	j = -1;
+	i = -1;
+	fd = open(path, O_RDONLY);
+	map->file_fill = ft_calloc(sizeof(char *), 7);
+	line = get_next_line(fd);
+	while (++i < map->start_map - 1)
+	{
+		if (line[0] != '\n')
+		{
+			x = -1;
+			map->file_fill[++j] = ft_strdup(line);
+			while (map->file_fill[j][++x])
+				if (map->file_fill[j][x] == '\n')
+					map->file_fill[j][x] = '\0';
+		}	
+		free(line);
+		line = get_next_line(fd);
+	}
+	return (free(line), close(fd));
 }

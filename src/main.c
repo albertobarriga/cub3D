@@ -27,6 +27,7 @@ void	free_matrix(char **matrix)
 void	free_struct_map(t_map *map)
 {
 	free_matrix(map->map_fill);
+	free_matrix(map->file_fill);
 	free(map->c);
 	free(map->f);
 	free(map->ea);
@@ -64,8 +65,8 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		ft_help_argv("\033[0;31mError: unsupported arguments\n");
 	checker_errors_and_init(argv[1], &map);
-	// printf("height = %i\n", map.height);
-	// printf("width = %i\n", map.width);
+	printf("height = %i\n", map.height);
+	printf("width = %i\n", map.width);
 	// printf("start_map  %i\n", map.start_map);
 	// printf("NO  %s\n", map.no);
 	// printf("WE   %s\n", map.we);
@@ -73,8 +74,9 @@ int	main(int argc, char **argv)
 	// printf("SO   %s\n", map.so);
 	// printf("F    %s\n", map.f);
 	// printf("C    %s\n", map.c);
-	// printf("F color    %x\n", map.floor_color);
-	// printf("C color   %x\n", map.ceiling_color);
+	// printf("Floor color    %x\n", map.floor_color);
+	// printf("Ceiling color   %x\n", map.ceiling_color);
+	print_matrix(map.file_fill);
 	print_matrix(map.map_fill);
 	// init_args_mlx(&args);
 	// init_args(&args, &map);

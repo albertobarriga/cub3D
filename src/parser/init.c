@@ -6,7 +6,7 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:15:12 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/27 13:29:35 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/05/29 17:24:07 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,21 @@ void	init_color(t_map *map)
 
 void	init_map(t_map *map, char *path)
 {
+	map->so = 0;
+	map->no = 0;
+	map->we = 0;
+	map->ea = 0;
+	map->c = 0;
+	map->f = 0;
 	width_map(path, map);
 	map->map_fill = fill_map(path, map);
 	fill_wall(map, path);
 	map->floor_color = 0;
 	map->ceiling_color = 0;
+	file_fill(path, map);
+	if (map->no == 0 || map->ea == 0 || map->we == 0 || map->so == 0 
+		| map->f == 0 || map->c == 0)
+		ft_help_char_elements_map("Error:\n");
 	init_color(map);
 }
 
@@ -75,6 +85,44 @@ char	*save_struct_walls(char *line)
 	return (path);
 }
 
+char	*is_char_no_valid(int fd)
+{
+	int		i;
+	int		j;
+	char	*line;
+	char	*line_new;
+
+	i = -1;
+	j = -1;
+	line = get_next_line(fd);
+	line_new = calloc(sizeof(char), ft_strlen(line));
+	while (line[++i])
+	{
+		if ((line[i] != ' ' || line[i] != '\t'))
+			line_new[++j] = line[i];
+	}
+	line_new[++j] = '\0';
+	free(line);
+	return (line_new);
+}
+
+int	error_elements(t_map *map, char *line)
+{
+	if (ft_strnstr(line, "NO ", 3) && map->no != 0)
+		ft_help_char_elements_map("Error:\n");
+	else if (ft_strnstr(line, "SO ", 3) && map->so != 0)
+		ft_help_char_elements_map("Error:\n");
+	else if (ft_strnstr(line, "WE ", 3) && map->we != 0)
+		ft_help_char_elements_map("Error:\n");
+	else if (ft_strnstr(line, "EA ", 3) && map->ea != 0)
+		ft_help_char_elements_map("Error:\n");
+	else if (ft_strnstr(line, "F ", 3) && map->f != 0)
+		ft_help_char_elements_map("Error:\n");
+	else if (ft_strnstr(line, "C ", 3) && map->c != 0)
+		ft_help_char_elements_map("Error:\n");
+	return (0);
+}
+
 void	fill_wall(t_map *map, char *path_map)
 {
 	int		fd;
@@ -83,23 +131,23 @@ void	fill_wall(t_map *map, char *path_map)
 
 	i = -1;
 	fd = open(path_map, O_RDONLY);
-	if (fd < 0)
-		return ;
-	while (++i <= map->height)
+	while (++i < map->start_map - 1)
 	{
 		line = get_next_line(fd);
-		if (ft_strnstr(line, "NO", 2))
+		if (ft_strnstr(line, "NO .", 4) && !error_elements(map, line))
 			map->no = save_struct_walls(line);
-		else if (ft_strnstr(line, "SO", 2))
+		else if (ft_strnstr(line, "SO .", 4) && !error_elements(map, line))
 			map->so = save_struct_walls(line);
-		else if (ft_strnstr(line, "WE", 2))
+		else if (ft_strnstr(line, "WE .", 4) && !error_elements(map, line))
 			map->we = save_struct_walls(line);
-		else if (ft_strnstr(line, "EA", 2))
+		else if (ft_strnstr(line, "EA .", 4) && !error_elements(map, line))
 			map->ea = save_struct_walls(line);
-		else if (ft_strnstr(line, "F", 1))
+		else if (ft_strnstr(line, "F ", 2) && !error_elements(map, line))
 			map->f = save_struct_walls(line);
-		else if (ft_strnstr(line, "C", 1))
+		else if (ft_strnstr(line, "C ", 2) && !error_elements(map, line))
 			map->c = save_struct_walls(line);
+		else if (line[0] != '\n')
+			ft_help_char_elements_map("Error: en final\n");
 		free(line);
 	}
 }

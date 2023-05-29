@@ -23,6 +23,7 @@ typedef struct s_map
 	int			height;
 	int			start_map;
 	char		**map_fill;
+	char		**file_fill;
 	char		*no;
 	char		*so;
 	char		*we;
@@ -32,6 +33,7 @@ typedef struct s_map
 	uint32_t	ceiling_color;
 	uint32_t	floor_color;
 }	t_map;
+
 typedef struct s_args
 {
 	mlx_t			*mlx;
@@ -47,6 +49,7 @@ typedef struct s_args
 /**/
 char	**fill_map(char *_path_map, t_map *map);
 void	fill_wall(t_map *map, char *path_map);
+int		file_fill( char *path, t_map *map);
 
 /*utils_parse.c*/
 void	width_map(char *path_map, t_map	*map);
@@ -57,6 +60,7 @@ int		first_line_map(int fd, t_map *map);
 void	ft_help_colors(char *error);
 void	ft_help_argv(char *error);
 void	ft_help_map(char *error);
+void	ft_help_char_elements_map(char *error);
 
 /*checker_map.c*/
 int		is_char_valid(char c);
