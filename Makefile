@@ -11,6 +11,7 @@ SRC = 	src/main.c \
 		src/raycaster/init_raycaster.c \
 	 	src/checker/error.c \
 	 	src/checker/checker_map.c \
+	 	src/checker/free_road.c \
 	 	src/checker/checker_elements.c
 
 LIBM = MLX42/libmlx42.a
