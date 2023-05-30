@@ -39,6 +39,8 @@ void	init_player(t_map	*map)
 	map->player->y = map->pj->y;
 	map->player->planex = 0;
 	map->player->planey = 0.66;
+	map->player->dirx = 0;
+	map->player->diry = 0;
 
 	if (map->pj->orientation == 'N')
 		map->player->diry = 1;
@@ -48,6 +50,7 @@ void	init_player(t_map	*map)
 		map->player->dirx = 1;
 	else if (map->pj->orientation == 'W')
 		map->player->dirx = -1;
+	printf("dirx= %f\n", map->player->dirx);
 }
 
 void	hook(void *param)
@@ -58,13 +61,25 @@ void	hook(void *param)
 	if (mlx_is_key_down(args->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(args->mlx);
 	if (mlx_is_key_down(args->mlx, MLX_KEY_RIGHT))
-		/*rote*/;
+		rotate(args->map->player, 0.08);
 	if (mlx_is_key_down(args->mlx, MLX_KEY_LEFT))
-		/*rote*/;
+		rotate(args->map->player, -0.08);
 
 	// moves:
 	// keydata.key == MLX_KEY_D
 	// keydata.key == MLX_KEY_A
+}
+void	rotate(t_player *pl, float a)
+{
+	const float	old_dirx = pl->dirx;
+	const float	oldcamx = pl->raydirx;
+	const float	v_cos = cosf(a);
+	const float	v_sin = sinf(a);
+
+	pl->dirx = old_dirx * v_cos - pl->diry * v_sin;
+	pl->diry = old_dirx * v_sin + pl->diry * v_cos;
+	pl->raydirx = oldcamx * v_cos - pl->raydiry * v_sin;
+	pl->raydiry = oldcamx * v_sin + pl->raydiry * v_cos;
 }
 
 void	print_back(t_args *args, t_map *map)
@@ -114,17 +129,19 @@ void	print_walls(t_args *args, t_map *map, t_player *pl)
 	while (x < WIDTH)
 	{
 		pl->camerax = 2 * x / (double)WIDTH - 1;
-		printf("x: %d, camara: %f\n", x, pl->camerax);
+		// printf("x: %d, camara: %f\n", x, pl->camerax);
 		pl->raydirx = pl->dirx + pl->planex * pl->camerax;
 		pl->raydiry = pl->diry + pl->planey * pl->camerax;
-		printf("rayx: %f, rayy: %f\n", pl->raydirx, pl->raydiry);
+		// printf("rayx: %f, rayy: %f\n", pl->raydirx, pl->raydiry);
 		pl->mapx = (int)(pl->x);
 		pl->mapy = (int)(pl->y);
-		if (pl->dirx == 0)
+		pl->hit = 0;
+		printf("mapy = %d\n", pl->mapy);
+		if (pl->raydirx == 0)
 			pl->deltadistx = 1e30;
 		else
 			pl->deltadistx = fabs(1 / pl->raydirx);
-		if (pl->diry == 0)
+		if (pl->raydiry == 0)
 			pl->deltadisty = 1e30;
 		else
 			pl->deltadisty = fabs(1 / pl->raydiry);
@@ -149,7 +166,6 @@ void	print_walls(t_args *args, t_map *map, t_player *pl)
 			pl->stepy = 1;
 			pl->sidedisty = (pl->mapy + 1.0 - pl->y) * pl->deltadisty;
 		}
-		pl->hit = 0;
 		while (pl->hit == 0)
 		{
 			if (pl->sidedistx < pl->sidedisty)
@@ -169,7 +185,7 @@ void	print_walls(t_args *args, t_map *map, t_player *pl)
 				pl->side = 1;
 			}
 			//printf("x = %d y = %d, map: %c\n", pl->mapx, pl->mapy, map->map_fill[pl->mapy][pl->mapx]);
-			if (map->map_fill[pl->mapy][pl->mapx] != '0')
+			if (map->map_fill[pl->mapy][pl->mapx] == '1')
 				pl->hit = 1;
 		}
 		// printf("sdx: %f, sdy: %f, ddx: %f, ddy: %f\n", pl->sidedistx, pl->sidedisty, pl->deltadistx, pl->deltadisty);
@@ -177,7 +193,7 @@ void	print_walls(t_args *args, t_map *map, t_player *pl)
 			pl->perpwalldist = pl->sidedistx - pl->deltadistx;
 		else
 			pl->perpwalldist = pl->sidedisty - pl->deltadisty;
-		pl->lineheight = (int)(HEIGHT / (pl->perpwalldist / 300));
+		pl->lineheight = (int)(HEIGHT / (pl->perpwalldist / 100));
 		// printf("lineheight: %d, perpwalldist: %f\n", pl->lineheight, pl->perpwalldist);
 		pl->drawstart = -pl->lineheight / 2 + HEIGHT / 2;
 		if (pl->drawstart < 0)
@@ -185,6 +201,7 @@ void	print_walls(t_args *args, t_map *map, t_player *pl)
 		pl->drawend = pl->lineheight / 2 + HEIGHT / 2;
 		if (pl->drawend >= HEIGHT)
 			pl->drawend = HEIGHT - 1;
+// Diferenciar lado para pintar de un text o otra
 		print_vert_line(x, pl->drawstart, pl->drawend, 0xFBAED2FF, args);
 		x++;
 	}
