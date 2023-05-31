@@ -37,16 +37,16 @@ void	init_player(t_map	*map)
 	map->player = malloc(sizeof(t_player));
 	printf("pj x = %d\n", map->pj->x);
 	printf("orie = %c\n", map->pj->orientation);
-	map->player->x = map->pj->x;
-	map->player->y = map->pj->y;
+	map->player->x = map->pj->x + 0.5;
+	map->player->y = map->pj->y + 0.5;
 	map->player->planex = 0;
 	map->player->planey = 0.66;
 	map->player->dirx = 0;
 	map->player->diry = 0;
 	if (map->pj->orientation == 'N')
-		map->player->diry = 1;
-	else if (map->pj->orientation == 'S')
 		map->player->diry = -1;
+	else if (map->pj->orientation == 'S')
+		map->player->diry = 1;
 	else if (map->pj->orientation == 'E')
 		map->player->dirx = 1;
 	else if (map->pj->orientation == 'W')
@@ -61,16 +61,29 @@ void	hook(void *param)
 	args = (t_args *) param;
 	if (mlx_is_key_down(args->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(args->mlx);
-	if (mlx_is_key_down(args->mlx, MLX_KEY_RIGHT) || mlx_is_key_down(args->mlx, MLX_KEY_D))
-	{
-		rotate(args->map->player, -0.0174533);
-		print_walls(args, args->map, args->map->player);
-	}
-	if (mlx_is_key_down(args->mlx, MLX_KEY_LEFT) || mlx_is_key_down(args->mlx, MLX_KEY_A))
+	if (mlx_is_key_down(args->mlx, MLX_KEY_RIGHT))
 	{
 		rotate(args->map->player, 0.0174533);
 		print_walls(args, args->map, args->map->player);
 	}
+	if (mlx_is_key_down(args->mlx, MLX_KEY_LEFT))
+	{
+		rotate(args->map->player, -0.0174533);
+		print_walls(args, args->map, args->map->player);
+	}
+	if (mlx_is_key_down(args->mlx, MLX_KEY_W))
+	{
+		args->map->player->x += args->map->player->dirx * 0.2;
+		args->map->player->y += args->map->player->diry * 0.2;
+		print_walls(args, args->map, args->map->player);
+	}
+	if (mlx_is_key_down(args->mlx, MLX_KEY_S))
+	{
+		args->map->player->x -= args->map->player->dirx * 0.2;
+		args->map->player->y -= args->map->player->diry * 0.2;
+		print_walls(args, args->map, args->map->player);
+	}
+	// printf("x = %f,y = %f\n", args->map->player->x, args->map->player->y);
 
 	// moves:
 	// keydata.key == MLX_KEY_D
@@ -160,7 +173,7 @@ void	print_walls(t_args *args, t_map *map, t_player *pl)
 		// printf("x: %d, camara: %f\n", x, pl->camerax);
 		pl->raydirx = pl->dirx + pl->planex * pl->camerax;
 		pl->raydiry = pl->diry + pl->planey * pl->camerax;
-		printf("rayx: %f, rayy: %f\n", pl->raydirx, pl->raydiry);
+		//printf("rayx: %f, rayy: %f\n", pl->raydirx, pl->raydiry);
 		pl->mapx = (int)(pl->x);
 		pl->mapy = (int)(pl->y);
 		pl->hit = 0;
@@ -197,7 +210,7 @@ void	print_walls(t_args *args, t_map *map, t_player *pl)
 		{
 			if (pl->sidedistx < pl->sidedisty)
 			{
-				pl->sidedistx += pl->sidedistx;
+				pl->sidedistx += pl->deltadistx;
 				// printf("stepx = %d\n", pl->stepx);
 				pl->mapx += pl->stepx;
 				pl->side = 0;
@@ -205,22 +218,23 @@ void	print_walls(t_args *args, t_map *map, t_player *pl)
 			else
 			{
 				// printf("stepy = %d\n", pl->stepy);
-				pl->sidedisty += pl->sidedisty;
+				pl->sidedisty += pl->deltadisty;
 				// printf("x = %d y = %d\n", pl->mapx, pl->mapy);
 				pl->mapy += pl->stepy;
 				// printf("fuaaaax = %d y = %d\n", pl->mapx, pl->mapy);
 				pl->side = 1;
 			}
-			//printf("x = %d y = %d, map: %c\n", pl->mapx, pl->mapy, map->map_fill[pl->mapy][pl->mapx]);
-			if (map->map_fill[pl->mapy][pl->mapx] == '1')
+			if (map->map_fill[pl->mapy][pl->mapx] == '1') {
+			// printf("x = %d y = %d, rayx: %f, rayy: %f\n", pl->mapx, pl->mapy, pl->raydirx, pl->raydiry);
 				pl->hit = 1;
+			}
 		}
 		// printf("sdx: %f, sdy: %f, ddx: %f, ddy: %f\n", pl->sidedistx, pl->sidedisty, pl->deltadistx, pl->deltadisty);
 		if (pl->side == 0)
 			pl->perpwalldist = pl->sidedistx - pl->deltadistx;
 		else
 			pl->perpwalldist = pl->sidedisty - pl->deltadisty;
-		pl->lineheight = (int)(HEIGHT / (pl->perpwalldist / 300));
+		pl->lineheight = (int)(HEIGHT / (pl->perpwalldist));
 		// printf("lineheight: %d, perpwalldist: %f\n", pl->lineheight, pl->perpwalldist);
 		pl->drawstart = -pl->lineheight / 2 + HEIGHT / 2;
 		if (pl->drawstart < 0)
@@ -229,7 +243,8 @@ void	print_walls(t_args *args, t_map *map, t_player *pl)
 		if (pl->drawend >= HEIGHT)
 			pl->drawend = HEIGHT - 1;
 // Diferenciar lado para pintar de un text o otra
-		print_vert_line(x, pl->drawstart, pl->drawend, 0xFBAED2FF, args);
+		int color = pl->side ? 0xFBAED2FF : 0xfc030bff;
+		print_vert_line(x, pl->drawstart, pl->drawend, color, args);
 		x++;
 	}
 	mlx_image_to_window(args->mlx, args->walls, 0, 0);
