@@ -18,8 +18,10 @@ void	init_args_mlx(t_args *args)
 
 void	init_args(t_args *args, t_map *map)
 {
-	mlx_load_text(args, map);
+	int	i;
 
+	i = 0;
+	mlx_load_text(args, map);
 	mlx_loop_hook(args->mlx, &hook, args);
 	// mlx_set_cursor_mode(args->mlx, MLX_MOUSE_DISABLED);
 	print_back(args, map);
@@ -41,7 +43,6 @@ void	init_player(t_map	*map)
 	map->player->planey = 0.66;
 	map->player->dirx = 0;
 	map->player->diry = 0;
-
 	if (map->pj->orientation == 'N')
 		map->player->diry = 1;
 	else if (map->pj->orientation == 'S')
@@ -60,26 +61,52 @@ void	hook(void *param)
 	args = (t_args *) param;
 	if (mlx_is_key_down(args->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(args->mlx);
-	if (mlx_is_key_down(args->mlx, MLX_KEY_RIGHT))
-		rotate(args->map->player, 0.08);
-	if (mlx_is_key_down(args->mlx, MLX_KEY_LEFT))
-		rotate(args->map->player, -0.08);
+	if (mlx_is_key_down(args->mlx, MLX_KEY_RIGHT) || mlx_is_key_down(args->mlx, MLX_KEY_D))
+	{
+		rotate(args->map->player, -0.0174533);
+		print_walls(args, args->map, args->map->player);
+	}
+	if (mlx_is_key_down(args->mlx, MLX_KEY_LEFT) || mlx_is_key_down(args->mlx, MLX_KEY_A))
+	{
+		rotate(args->map->player, 0.0174533);
+		print_walls(args, args->map, args->map->player);
+	}
 
 	// moves:
 	// keydata.key == MLX_KEY_D
 	// keydata.key == MLX_KEY_A
 }
-void	rotate(t_player *pl, float a)
+void	rotate(t_player *pl, double a)
 {
-	const float	old_dirx = pl->dirx;
-	const float	oldcamx = pl->raydirx;
-	const float	v_cos = cosf(a);
-	const float	v_sin = sinf(a);
+	// float	old_dirx;
+	// float	oldcamx;
+	// float	v_cos;
+	// float	v_sin;
 
+	double	oldplanex;
+	double	old_dirx;
+	double	v_cos;
+	double	v_sin;
+
+	// const double	old_dirx = pl->dirx;
+	// const double	oldcamx = pl->raydirx;
+	// const double	v_cos = cosf(a);
+	// const double	v_sin = sinf(a);
+
+	old_dirx = pl->dirx;
+	oldplanex = pl->planex;
+	v_cos = cosf(a);
+	printf("este el vcos = %f\n", v_cos);
+	v_sin = sinf(a);
+
+	printf("fin en rotate\n");
 	pl->dirx = old_dirx * v_cos - pl->diry * v_sin;
 	pl->diry = old_dirx * v_sin + pl->diry * v_cos;
-	pl->raydirx = oldcamx * v_cos - pl->raydiry * v_sin;
-	pl->raydiry = oldcamx * v_sin + pl->raydiry * v_cos;
+	// pl->raydirx = oldplanex * v_cos - pl->raydiry * v_sin;
+	// pl->raydiry = oldplanex * v_sin + pl->raydiry * v_cos;
+
+	pl->planex = oldplanex * v_cos - pl->planey * v_sin;
+	pl->planey = oldplanex * v_sin + pl->planey * v_cos;
 }
 
 void	print_back(t_args *args, t_map *map)
@@ -124,6 +151,7 @@ void	print_walls(t_args *args, t_map *map, t_player *pl)
 {
 	int	x;
 
+	mlx_delete_image(args->mlx, args->walls);
 	args->walls = mlx_new_image(args->mlx, WIDTH, HEIGHT);
 	x = 0;
 	while (x < WIDTH)
@@ -132,11 +160,11 @@ void	print_walls(t_args *args, t_map *map, t_player *pl)
 		// printf("x: %d, camara: %f\n", x, pl->camerax);
 		pl->raydirx = pl->dirx + pl->planex * pl->camerax;
 		pl->raydiry = pl->diry + pl->planey * pl->camerax;
-		// printf("rayx: %f, rayy: %f\n", pl->raydirx, pl->raydiry);
+		printf("rayx: %f, rayy: %f\n", pl->raydirx, pl->raydiry);
 		pl->mapx = (int)(pl->x);
 		pl->mapy = (int)(pl->y);
 		pl->hit = 0;
-		printf("mapy = %d\n", pl->mapy);
+		// printf("mapy = %d\n", pl->mapy);
 		if (pl->raydirx == 0)
 			pl->deltadistx = 1e30;
 		else
@@ -145,7 +173,6 @@ void	print_walls(t_args *args, t_map *map, t_player *pl)
 			pl->deltadisty = 1e30;
 		else
 			pl->deltadisty = fabs(1 / pl->raydiry);
-
 		if (pl->raydirx < 0)
 		{
 			pl->stepx = -1;
@@ -193,7 +220,7 @@ void	print_walls(t_args *args, t_map *map, t_player *pl)
 			pl->perpwalldist = pl->sidedistx - pl->deltadistx;
 		else
 			pl->perpwalldist = pl->sidedisty - pl->deltadisty;
-		pl->lineheight = (int)(HEIGHT / (pl->perpwalldist / 100));
+		pl->lineheight = (int)(HEIGHT / (pl->perpwalldist / 300));
 		// printf("lineheight: %d, perpwalldist: %f\n", pl->lineheight, pl->perpwalldist);
 		pl->drawstart = -pl->lineheight / 2 + HEIGHT / 2;
 		if (pl->drawstart < 0)

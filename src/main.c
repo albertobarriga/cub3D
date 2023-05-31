@@ -63,6 +63,7 @@ int	main(int argc, char **argv)
 	t_map		map;
 	t_args		args;
 
+	args.map = &map;
 	atexit(leaks);
 	if (argc != 2)
 		ft_help_argv("\033[0;31mError: unsupported arguments\n");
