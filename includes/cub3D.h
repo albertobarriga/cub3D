@@ -117,5 +117,6 @@ void	print_vert_line(int x, int ystart, int yend, int color, t_args *args);
 void	print_walls(t_args *args, t_map *map, t_player *pl);
 void	init_player(t_map	*map);
 void	rotate(t_player *pl, double a);
+void	move(t_args *args, double varx, double vary);
 
 #endif 
