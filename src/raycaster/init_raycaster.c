@@ -66,9 +66,9 @@ void	hook(void *param)
 	if (mlx_is_key_down(args->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(args->mlx);
 	if (mlx_is_key_down(args->mlx, MLX_KEY_RIGHT))
-		rotate(args->map->player, 0.0174533);
+		rotate(args->map->player, 0.033069396353);
 	if (mlx_is_key_down(args->mlx, MLX_KEY_LEFT))
-		rotate(args->map->player, -0.0174533);
+		rotate(args->map->player, -0.033069396353);
 	if (mlx_is_key_down(args->mlx, MLX_KEY_W))
 		move(args, args->map->player->dirx, args->map->player->diry);
 	if (mlx_is_key_down(args->mlx, MLX_KEY_S))
@@ -85,8 +85,8 @@ void	move(t_args *args, double varx, double vary)
 	double	new_x;
 	double	new_y;
 
-	new_x = args->map->player->x + varx * 0.1;
-	new_y = args->map->player->y + vary * 0.1;
+	new_x = args->map->player->x + varx * 0.2;
+	new_y = args->map->player->y + vary * 0.2;
 	// printf("mapx = %d, mapy= %d\n", pl->mapx, pl->mapy);
 	printf("posicion del mapa = %c\n", args->map->map_fill[(int)roundl(new_y + args->map->player->diry / 1e5)][(int)roundl(new_x + 0.49 + args->map->player->dirx / 1e5)]);
 	if (args->map->map_fill[(int)args->map->player->y][(int)(new_x + args->map->player->dirx / 1e5)] != '1')
@@ -227,10 +227,11 @@ void	print_walls(t_args *args, t_map *map, t_player *pl)
 		pl->drawend = pl->lineheight / 2 + HEIGHT / 2;
 		if (pl->drawend >= HEIGHT)
 			pl->drawend = HEIGHT - 1;
+			
 // Diferenciar lado para pintar de un text o otra
+	
 
-
-		// int color = pl->side ? 0xFBAED2FF : 0xfc030bff;
+		int color = pl->side ? 0xFBAED2FF : 0xfc030bff;
 		print_vert_line(x, pl->drawstart, pl->drawend, color, args);
 		x++;
 	}
