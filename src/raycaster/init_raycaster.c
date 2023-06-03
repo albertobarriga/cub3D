@@ -66,9 +66,9 @@ void	hook(void *param)
 	if (mlx_is_key_down(args->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(args->mlx);
 	if (mlx_is_key_down(args->mlx, MLX_KEY_RIGHT))
-		rotate(args->map->player, 0.033069396353);
+		rotate(args->map->player, ROTATION);
 	if (mlx_is_key_down(args->mlx, MLX_KEY_LEFT))
-		rotate(args->map->player, -0.033069396353);
+		rotate(args->map->player, -ROTATION);
 	if (mlx_is_key_down(args->mlx, MLX_KEY_W))
 		move(args, args->map->player->dirx, args->map->player->diry);
 	if (mlx_is_key_down(args->mlx, MLX_KEY_S))

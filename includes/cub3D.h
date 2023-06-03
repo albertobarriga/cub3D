@@ -10,6 +10,10 @@
 # include <math.h>
 # define WIDTH 900
 # define HEIGHT 600
+# ifndef MPI
+#  define MPI 3.14159265358979323846
+# endif
+# define ROTATION 2 * MPI / 360 * 2
 
 typedef struct s_pj
 {
