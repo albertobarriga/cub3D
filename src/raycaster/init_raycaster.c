@@ -18,9 +18,6 @@ void	init_args_mlx(t_args *args)
 
 void	init_args(t_args *args, t_map *map)
 {
-	int	i;
-
-	i = 0;
 	mlx_load_text(args, map);
 	mlx_loop_hook(args->mlx, &hook, args);
 	// mlx_set_cursor_mode(args->mlx, MLX_MOUSE_DISABLED);
@@ -69,15 +66,9 @@ void	hook(void *param)
 	if (mlx_is_key_down(args->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(args->mlx);
 	if (mlx_is_key_down(args->mlx, MLX_KEY_RIGHT))
-	{
 		rotate(args->map->player, 0.0174533);
-		// print_walls(args, args->map, args->map->player);
-	}
 	if (mlx_is_key_down(args->mlx, MLX_KEY_LEFT))
-	{
 		rotate(args->map->player, -0.0174533);
-		// print_walls(args, args->map, args->map->player);
-	}
 	if (mlx_is_key_down(args->mlx, MLX_KEY_W))
 		move(args, args->map->player->dirx, args->map->player->diry);
 	if (mlx_is_key_down(args->mlx, MLX_KEY_S))
@@ -94,14 +85,14 @@ void	move(t_args *args, double varx, double vary)
 	double	new_x;
 	double	new_y;
 
-	new_x = args->map->player->x + varx * 0.2;
-	new_y = args->map->player->y + vary * 0.2;
-	if (args->map->map_fill[(int)roundl(new_y + args->map->player->diry / 1e5)][(int)roundl(new_x + + args->map->player->dirx / 1e5)] != '1')
-	{
+	new_x = args->map->player->x + varx * 0.1;
+	new_y = args->map->player->y + vary * 0.1;
+	// printf("mapx = %d, mapy= %d\n", pl->mapx, pl->mapy);
+	printf("posicion del mapa = %c\n", args->map->map_fill[(int)roundl(new_y + args->map->player->diry / 1e5)][(int)roundl(new_x + 0.49 + args->map->player->dirx / 1e5)]);
+	if (args->map->map_fill[(int)args->map->player->y][(int)(new_x + args->map->player->dirx / 1e5)] != '1')
 		args->map->player->x = new_x;
+	if (args->map->map_fill[(int)(new_y + args->map->player->diry / 1e5)][(int)args->map->player->x] != '1')
 		args->map->player->y = new_y;
-	}
-	// print_walls(args, args->map, args->map->player);
 }
 
 void	rotate(t_player *pl, double a)
@@ -162,12 +153,9 @@ void	mlx_load_text(t_args *args, t_map *map)
 void	print_walls(t_args *args, t_map *map, t_player *pl)
 {
 	int	x;
-	int	j;
 
 	if (args->walls)
 		mlx_delete_image(args->mlx, args->walls);
-	else
-		j = 1;
 	args->walls = mlx_new_image(args->mlx, WIDTH, HEIGHT);
 	x = 0;
 	while (x < WIDTH)
@@ -240,7 +228,9 @@ void	print_walls(t_args *args, t_map *map, t_player *pl)
 		if (pl->drawend >= HEIGHT)
 			pl->drawend = HEIGHT - 1;
 // Diferenciar lado para pintar de un text o otra
-		int color = pl->side ? 0xFBAED2FF : 0xfc030bff;
+
+
+		// int color = pl->side ? 0xFBAED2FF : 0xfc030bff;
 		print_vert_line(x, pl->drawstart, pl->drawend, color, args);
 		x++;
 	}
@@ -250,7 +240,6 @@ void	print_walls(t_args *args, t_map *map, t_player *pl)
 
 void	print_vert_line(int x, int ystart, int yend, int color, t_args *args)
 {
-	
 	// printf("raya x: %d, y0: %d, y1: %d\n", x, ystart, yend);
 	while(ystart <= yend)
 	{		
