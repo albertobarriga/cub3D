@@ -229,8 +229,7 @@ void	print_walls(t_args *args, t_map *map, t_player *pl)
 			pl->drawend = HEIGHT - 1;
 			
 // Diferenciar lado para pintar de un text o otra
-	
-
+		// info_hit(pl);
 		int color = pl->side ? 0xFBAED2FF : 0xfc030bff;
 		print_vert_line(x, pl->drawstart, pl->drawend, color, args);
 		x++;
@@ -239,8 +238,24 @@ void	print_walls(t_args *args, t_map *map, t_player *pl)
 	mlx_image_to_window(args->mlx, args->walls, 0, 0);
 }
 
+// Esta funcion determina si es NSWE, si tenemos un side = 0, dependiendiendo del signo de la dirx + W - E y con side = 1 , dirx - N y dirx + S
+void	info_hit(t_player *pl)
+{
+	if (pl->side == 0)
+	{
+		if (pl->dirx >= 0)
+			pl->side += 2;
+	}
+	if (pl->side == 1)
+	{
+		if (pl->diry >= 0)
+			pl->side += 2;	
+	}
+}
+
 void	print_vert_line(int x, int ystart, int yend, int color, t_args *args)
 {
+	printf("rayx: %f, rayy: %f\n", args->map->player->dirx, args->map->player->diry);
 	// printf("raya x: %d, y0: %d, y1: %d\n", x, ystart, yend);
 	while(ystart <= yend)
 	{		
