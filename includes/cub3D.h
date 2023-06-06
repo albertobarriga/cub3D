@@ -24,30 +24,34 @@ typedef struct s_pj
 
 typedef struct s_player
 {
-	double	x;
-	double	y;
-	double	dirx;
-	double	diry;
-	double	planex;
-	double	planey;
-	double	camerax;
-	double	raydirx;
-	double	raydiry;
-	int		mapx;
-	int		mapy;
-	double	sidedistx;
-	double	sidedisty;
-	double	deltadistx;
-	double	deltadisty;
-	int		stepx;
-	int		stepy;
-	double	perpwalldist;
-	int		hit;
-	int		side;
-	int		lineheight;
-	int		drawstart;
-	int		drawend;
-
+	double		x;
+	double		y;
+	double		dirx;
+	double		diry;
+	double		planex;
+	double		planey;
+	double		camerax;
+	double		raydirx;
+	double		raydiry;
+	int			mapx;
+	int			mapy;
+	double		sidedistx;
+	double		sidedisty;
+	double		deltadistx;
+	double		deltadisty;
+	int			stepx;
+	int			stepy;
+	double		perpwalldist;
+	int			hit;
+	int			side;
+	int			lineheight;
+	int			drawstart;
+	int			drawend;
+	int			tex_width;
+	int			tex_height;
+	int			tex_x;
+	int			tex_y;
+	uint32_t	color;
 }	t_player;
 
 typedef struct s_map
@@ -122,5 +126,10 @@ void	print_walls(t_args *args, t_map *map, t_player *pl);
 void	init_player(t_map	*map);
 void	rotate(t_player *pl, double a);
 void	move(t_args *args, double varx, double vary);
+void	info_hit(t_player *pl);
+void	info_tex(t_player *pl, t_args *args);
+void	take_measures(t_player *pl, t_args *args);
+uint8_t	*take_pixel(t_player *pl, t_args *args);
+void	printline_text(t_player *pl, t_args *args, int x);
 
 #endif 
