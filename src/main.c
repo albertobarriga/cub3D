@@ -72,7 +72,26 @@ int	main(int argc, char **argv)
 	init_args_mlx(&args);
 	init_args(&args, &map);
 	mlx_loop(args.mlx);
-	mlx_delete_image(args.mlx, args.img);
-	mlx_terminate(args.mlx);
+	free_cube(&args);
+	// mlx_delete_image(args.mlx, args.img);
+	// mlx_delete_image(args.mlx, args.back);
+	// mlx_delete_image(args.mlx, args.walls);
+	// mlx_terminate(args.mlx);
 	free_struct_map(&map);
+}
+
+void	free_cube(t_args *args)
+{
+	if (args->no_text)
+		mlx_delete_texture(args->no_text);
+	if (args->so_text)
+		mlx_delete_texture(args->so_text);
+	if (args->we_text)
+		mlx_delete_texture(args->we_text);
+	if (args->ea_text)
+		mlx_delete_texture(args->ea_text);
+	mlx_delete_image(args->mlx, args->img);
+	mlx_delete_image(args->mlx, args->back);
+	mlx_delete_image(args->mlx, args->walls);
+	mlx_terminate(args->mlx);
 }

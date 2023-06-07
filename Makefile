@@ -9,6 +9,10 @@ SRC = 	src/main.c \
 	 	src/parser/utils_parser.c \
 	 	src/parser/utils_init.c \
 		src/raycaster/init_raycaster.c \
+		src/raycaster/raycaster_utils.c \
+		src/raycaster/raycaster.c \
+		src/raycaster/print.c \
+		src/raycaster/hook.c \
 	 	src/checker/error.c \
 	 	src/checker/checker_map.c \
 	 	src/checker/checker_elements.c

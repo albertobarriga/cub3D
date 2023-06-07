@@ -10,11 +10,9 @@
 # include <math.h>
 # define WIDTH 900
 # define HEIGHT 600
-# ifndef MPI
-#  define MPI 3.14159265358979323846
-# endif
-# define ROTATION 2 * MPI / 360 * 2
+# define ROTATION 0.03490658503
 
+// This rotation is the same to 2 degrees
 typedef struct s_pj
 {
 	char	orientation;
@@ -131,5 +129,10 @@ void	info_tex(t_player *pl, t_args *args);
 void	take_measures(t_player *pl, t_args *args);
 uint8_t	*take_pixel(t_player *pl, t_args *args);
 void	printline_text(t_player *pl, t_args *args, int x);
+void	get_positions(t_player *pl, int x);
+void	get_step_sidedist(t_player *pl);
+void	check_hit(t_player *pl, t_map *map);
+void	get_linetoprint(t_player *pl);
+void	free_cube(t_args *args);
 
 #endif 

@@ -10,5 +10,5 @@ void	exit_cub(t_args *args)
 		mlx_delete_texture(args->we_text);
 	if (args->ea_text)
 		mlx_delete_texture(args->ea_text);
-	// exit(1);
+	exit(1);
 }
