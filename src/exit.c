@@ -12,3 +12,8 @@ void	exit_cub(t_args *args)
 		mlx_delete_texture(args->ea_text);
 	exit(1);
 }
+
+void	free_structs(t_args	*args)
+{
+	free(args->map->player);
+}

@@ -134,5 +134,6 @@ void	get_step_sidedist(t_player *pl);
 void	check_hit(t_player *pl, t_map *map);
 void	get_linetoprint(t_player *pl);
 void	free_cube(t_args *args);
+void	free_structs(t_args	*args);
 
 #endif 

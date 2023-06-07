@@ -9,21 +9,22 @@ void	print_back(t_args *args, t_map *map)
 	(void)map;
 	args->back = mlx_new_image(args->mlx, WIDTH, HEIGHT);
 	if (!args->back)
-		/*ERROR*/;
-	mid_height = HEIGHT / 2;
-	j = 0;
-	while (j < HEIGHT)
 	{
-		i = 0;
-		while (i < WIDTH)
+		free_structs(args);
+		free_cube(args);
+	}
+	mid_height = HEIGHT / 2;
+	j = -1;
+	while (++j < HEIGHT)
+	{
+		i = -1;
+		while (++i < WIDTH)
 		{
 			if (j < mid_height)
 				mlx_put_pixel(args->back, i, j, map->floor_color);
 			else
 				mlx_put_pixel(args->back, i, j, map->ceiling_color);
-			i++;
 		}
-		j++;
 	}
 	mlx_image_to_window(args->mlx, args->back, 0, 0);
 }

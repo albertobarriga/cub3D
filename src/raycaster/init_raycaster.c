@@ -8,12 +8,16 @@ void	init_args_mlx(t_args *args)
 	args->ea_text = NULL;
 	args->mlx = mlx_init(WIDTH, HEIGHT, "CUB3D", false);
 	if (!args->mlx)
+	{
 		free(args);
-		// error y frees
+		exit(0);
+	}
 	args->img = mlx_new_image(args->mlx, WIDTH, HEIGHT);
 	if (!args->img)
+	{
 		free(args);
-		// error y frees
+		exit(0);
+	}
 }
 
 void	init_args(t_args *args, t_map *map)
