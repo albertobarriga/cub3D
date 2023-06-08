@@ -22,7 +22,7 @@ LIBM = MLX42/libmlx42.a
 
 ifeq ($(USER), abarriga)
 	GLFW = -I include -lglfw -L /sgoinfre/goinfre/Perso/${USER}/homebrew/Cellar/glfw/3.3.8/lib
-ifeq ($(USER), jlimones)
+else if eq ($(USER), jlimones)
 	GLFW = -I include -lglfw -L /sgoinfre/goinfre/Perso/${USER}/homebrew/Cellar/glfw/3.3.8/lib
 else
 	GLFW = -I include -lglfw -L /opt/homebrew/opt/glfw/lib
