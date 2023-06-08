@@ -6,7 +6,7 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 04:42:51 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/29 19:30:48 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/06/08 10:13:31 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	first_line_map(int fd, t_map *map)
 			found = 1;
 		}
 		free(line);
-			line = get_next_line(fd);
+		line = get_next_line(fd);
 		if (found)
 			return (free(line), map->start_map);
 	}
@@ -110,5 +110,34 @@ void	search_x_y(t_map *map)
 				map->pj->x = x;
 			}
 		}
+	}
+}
+
+void	fill_wall(t_map *map, char *path_map)
+{
+	int		fd;
+	int		i;
+	char	*line;
+
+	i = -1;
+	fd = open(path_map, O_RDONLY);
+	while (++i < map->start_map - 1)
+	{
+		line = get_next_line(fd);
+		if (ft_strnstr(line, "NO .", 4) && !error_elements(map, line))
+			map->no = save_struct_walls(line);
+		else if (ft_strnstr(line, "SO .", 4) && !error_elements(map, line))
+			map->so = save_struct_walls(line);
+		else if (ft_strnstr(line, "WE .", 4) && !error_elements(map, line))
+			map->we = save_struct_walls(line);
+		else if (ft_strnstr(line, "EA .", 4) && !error_elements(map, line))
+			map->ea = save_struct_walls(line);
+		else if (ft_strnstr(line, "F ", 2) && !error_elements(map, line))
+			map->f = save_struct_walls(line);
+		else if (ft_strnstr(line, "C ", 2) && !error_elements(map, line))
+			map->c = save_struct_walls(line);
+		else if (line[0] != '\n')
+			ft_help_char_elements_map("Error: en final\n");
+		free(line);
 	}
 }
