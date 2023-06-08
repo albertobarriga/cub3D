@@ -82,6 +82,8 @@ typedef struct s_args
 char	**fill_map(char *_path_map, t_map *map);
 void	fill_wall(t_map *map, char *path_map);
 int		file_fill( char *path, t_map *map);
+int		error_elements(t_map *map, char *line);
+char	*save_struct_walls(char *line);
 
 /*utils_parse.c*/
 void	width_map(char *path_map, t_map	*map);
