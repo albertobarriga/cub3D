@@ -9,6 +9,10 @@ SRC = 	src/main.c \
 	 	src/parser/utils_parser.c \
 	 	src/parser/utils_init.c \
 		src/raycaster/init_raycaster.c \
+		src/raycaster/raycaster_utils.c \
+		src/raycaster/raycaster.c \
+		src/raycaster/print.c \
+		src/raycaster/hook.c \
 	 	src/checker/error.c \
 	 	src/checker/checker_map.c \
 	 	src/checker/free_road.c \
@@ -18,8 +22,10 @@ LIBM = MLX42/libmlx42.a
 
 ifeq ($(USER), abarriga)
 	GLFW = -I include -lglfw -L /sgoinfre/goinfre/Perso/${USER}/homebrew/Cellar/glfw/3.3.8/lib
-else
+ifeq ($(USER), jlimones)
 	GLFW = -I include -lglfw -L /sgoinfre/goinfre/Perso/${USER}/homebrew/Cellar/glfw/3.3.8/lib
+else
+	GLFW = -I include -lglfw -L /opt/homebrew/opt/glfw/lib
 endif
 # Mac 42
 # GLFW = -I include -lglfw -L /sgoinfre/goinfre/Perso/abarriga/homebrew/Cellar/glfw/3.3.8/lib

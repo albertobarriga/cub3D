@@ -10,7 +10,9 @@
 # include <math.h>
 # define WIDTH 900
 # define HEIGHT 600
+# define ROTATION 0.03490658503
 
+// This rotation is the same to 2 degrees
 typedef struct s_pj
 {
 	char	orientation;
@@ -20,30 +22,34 @@ typedef struct s_pj
 
 typedef struct s_player
 {
-	double	x;
-	double	y;
-	double	dirx;
-	double	diry;
-	double	planex;
-	double	planey;
-	double	camerax;
-	double	raydirx;
-	double	raydiry;
-	int		mapx;
-	int		mapy;
-	double	sidedistx;
-	double	sidedisty;
-	double	deltadistx;
-	double	deltadisty;
-	int		stepx;
-	int		stepy;
-	double	perpwalldist;
-	int		hit;
-	int		side;
-	int		lineheight;
-	int		drawstart;
-	int		drawend;
-
+	double		x;
+	double		y;
+	double		dirx;
+	double		diry;
+	double		planex;
+	double		planey;
+	double		camerax;
+	double		raydirx;
+	double		raydiry;
+	int			mapx;
+	int			mapy;
+	double		sidedistx;
+	double		sidedisty;
+	double		deltadistx;
+	double		deltadisty;
+	int			stepx;
+	int			stepy;
+	double		perpwalldist;
+	int			hit;
+	int			side;
+	int			lineheight;
+	int			drawstart;
+	int			drawend;
+	int			tex_width;
+	int			tex_height;
+	int			tex_x;
+	int			tex_y;
+	uint32_t	color;
 }	t_player;
 
 typedef struct s_map
@@ -121,5 +127,18 @@ void	exit_cub(t_args *args);
 void	print_vert_line(int x, int ystart, int yend, int color, t_args *args);
 void	print_walls(t_args *args, t_map *map, t_player *pl);
 void	init_player(t_map	*map);
+void	rotate(t_player *pl, double a);
+void	move(t_args *args, double varx, double vary);
+void	info_hit(t_player *pl);
+void	info_tex(t_player *pl, t_args *args);
+void	take_measures(t_player *pl, t_args *args);
+uint8_t	*take_pixel(t_player *pl, t_args *args);
+void	printline_text(t_player *pl, t_args *args, int x);
+void	get_positions(t_player *pl, int x);
+void	get_step_sidedist(t_player *pl);
+void	check_hit(t_player *pl, t_map *map);
+void	get_linetoprint(t_player *pl);
+void	free_cube(t_args *args);
+void	free_structs(t_args	*args);
 
 #endif 
