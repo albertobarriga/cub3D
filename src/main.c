@@ -56,6 +56,7 @@ void	checker_errors_and_init(char *path_map, t_map *map)
 	if (!checker_colors(map->f) || !checker_colors(map->c))
 		ft_help_colors("Error:\n unsupported colors\n");
 	search_x_y(map);
+	ft_free_road(map);
 }
 
 int	main(int argc, char **argv)
@@ -63,7 +64,7 @@ int	main(int argc, char **argv)
 	t_map		map;
 	//t_args		args;
 
-	//atexit(leaks);
+	atexit(leaks);
 	if (argc != 2)
 		ft_help_argv("\033[0;31mError: unsupported arguments\n");
 	checker_errors_and_init(argv[1], &map);
