@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abarriga <abarriga@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/08 11:58:01 by abarriga          #+#    #+#             */
+/*   Updated: 2023/06/08 11:58:02 by abarriga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3D.h"
 
 void	leaks(void)
@@ -69,7 +81,6 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		ft_help_argv("\033[0;31mError: unsupported arguments\n");
 	checker_errors_and_init(argv[1], &map);
-	//print_matrix(map.map_fill);
 	init_args_mlx(&args);
 	init_args(&args, &map);
 	mlx_loop(args.mlx);
