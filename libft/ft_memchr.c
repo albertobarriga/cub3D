@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 12:10:58 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/21 04:30:12 by user             ###   ########.fr       */
+/*   Updated: 2023/06/08 12:07:30 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*ft_memchr(const void *s, int c, int n)
 {
-	int				i;
+	int					i;
 	unsigned char		*ptr;
 
 	i = 0;

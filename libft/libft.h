@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 12:56:48 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/21 04:30:12 by user             ###   ########.fr       */
+/*   Updated: 2023/06/08 12:06:55 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int				ft_isprint(int c);
 void			*ft_memcpy(void *dst, const void *src, int n);
 void			*ft_memmove(void *dst, const void *src, int len);
 void			*ft_memset(void *b, int c, int len);
-int			ft_strlcpy(char *dst, char *src, int size);
-int			ft_strlen(const char *s);
-int			ft_strlcat(char *dst, char *src, int size);
+int				ft_strlcpy(char *dst, char *src, int size);
+int				ft_strlen(const char *s);
+int				ft_strlcat(char *dst, char *src, int size);
 int				ft_toupper(int c);
 int				ft_tolower(int c);
 char			*ft_strchr(const char *str, int c);
