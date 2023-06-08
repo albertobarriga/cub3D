@@ -6,7 +6,7 @@
 /*   By: jlimones <jlimones@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 18:09:11 by jlimones          #+#    #+#             */
-/*   Updated: 2023/05/31 15:10:00 by jlimones         ###   ########.fr       */
+/*   Updated: 2023/06/08 11:26:03 by jlimones         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,13 @@ int	is_char_valid_player(char c)
 	return (0);
 }
 
+int	ft_orientation(t_map *map, char c, int count)
+{
+	map->pj->orientation = c;
+	count++;
+	return (count);
+}
+
 /**
  * @brief Chequea que los caracteres introduciodos en el mapa son validos
  * 
@@ -57,10 +64,7 @@ int	checker_char_map(t_map *map, int fd)
 			if (!is_char_valid(line[i]) || count > 1)
 				return (free(line), 0);
 			if (is_char_valid_player(line[i]))
-			{
-				map->pj->orientation = line[i];
-				count++;
-			}
+				count = ft_orientation(map, line[i], count);
 		}
 		free(line);
 		line = get_next_line(fd);

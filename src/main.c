@@ -5,14 +5,14 @@ void	leaks(void)
 	system("leaks -q cub3D");
 }
 
-void	print_matrix(char **matrix)
-{
-	int	i;
+// void	print_matrix(char **matrix)
+// {
+// 	int	i;
 
-	i = -1;
-	while (matrix[++i])
-		printf("%s\n", matrix[i]);
-}
+// 	i = -1;
+// 	while (matrix[++i])
+// 		printf("%s\n", matrix[i]);
+// }
 
 void	free_matrix(char **matrix)
 {
@@ -69,7 +69,7 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		ft_help_argv("\033[0;31mError: unsupported arguments\n");
 	checker_errors_and_init(argv[1], &map);
-	print_matrix(map.map_fill);
+	//print_matrix(map.map_fill);
 	init_args_mlx(&args);
 	init_args(&args, &map);
 	mlx_loop(args.mlx);
