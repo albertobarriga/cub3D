@@ -100,6 +100,9 @@ int		is_char_valid(char c);
 int		checker_char_map(t_map *map, int fd);
 int		checker_map(char *path_map, t_map *map);
 
+/*free_road.c*/
+int		ft_free_road(t_map *map);
+
 /*checker_elements.c*/
 int		checker_path_map(char *path_map);
 int		checker_colors(char *str);
