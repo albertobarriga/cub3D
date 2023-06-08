@@ -21,17 +21,9 @@ LIBM = MLX42/libmlx42.a
 
 ifeq ($(USER), abarriga)
 	GLFW = -I include -lglfw -L /sgoinfre/goinfre/Perso/${USER}/homebrew/Cellar/glfw/3.3.8/lib
-# else if eq ($(USER), jlimones)
-# 	GLFW = -I include -lglfw -L /sgoinfre/goinfre/Perso/${USER}/homebrew/Cellar/glfw/3.3.8/lib
 else
 	GLFW = -I include -lglfw -L /opt/homebrew/opt/glfw/lib
 endif
-# Mac 42
-# GLFW = -I include -lglfw -L /sgoinfre/goinfre/Perso/abarriga/homebrew/Cellar/glfw/3.3.8/lib
-
-# Mac alberto
-# GLFW = -I include -lglfw -L /opt/homebrew/opt/glfw/lib
-
 
 
 AUTHOR = jlimones / abarriga
@@ -66,7 +58,7 @@ endif
 	@printf "%b" "$(OBJ_COLOR)Author:	$(WARN_COLOR)$(AUTHOR)\n"
 	@printf "%b" "$(OBJ_COLOR)Date: 	$(WARN_COLOR)$(DATE)\n\033[m"
 	@printf "%b" "$(OBJ_COLOR)CC: 	$(WARN_COLOR)$(CC)\n\033[m"
-	@printf "%b" "$(OBJ_COLOR)Flags: 	$(WARN_COLOR)$(FLAGS)\n\033[m"
+	@printf "%b" "$(OBJ_COLOR)Flags: 	$(WARN_COLOR)$(CFLAGS)\n\033[m"
 
 $(NAME): ${OBJ} $(LIBM)
 	@make -C libft

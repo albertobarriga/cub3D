@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abarriga <abarriga@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/08 14:29:14 by abarriga          #+#    #+#             */
+/*   Updated: 2023/06/08 14:29:15 by abarriga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 # include "../libft/libft.h"
@@ -124,7 +136,6 @@ void	hook(void *param);
 void	print_back(t_args *args, t_map *map);
 void	mlx_load_text(t_args *args, t_map *map);
 void	exit_cub(t_args *args);
-void	print_vert_line(int x, int ystart, int yend, int color, t_args *args);
 void	print_walls(t_args *args, t_map *map, t_player *pl);
 void	init_player(t_map	*map);
 void	rotate(t_player *pl, double a);
