@@ -17,3 +17,16 @@ void	free_structs(t_args	*args)
 {
 	free(args->map->player);
 }
+
+void	free_cube(t_args *args)
+{
+	mlx_delete_texture(args->no_text);
+	mlx_delete_texture(args->so_text);
+	mlx_delete_texture(args->we_text);
+	mlx_delete_texture(args->ea_text);
+	mlx_delete_image(args->mlx, args->img);
+	mlx_delete_image(args->mlx, args->back);
+	mlx_delete_image(args->mlx, args->walls);
+	free_structs(args);
+	mlx_terminate(args->mlx);
+}

@@ -29,7 +29,6 @@ void	print_walls(t_args *args, t_map *map, t_player *pl)
 		printline_text(pl, args, x);
 		x++;
 	}
-	// mlx_delete_image(args->mlx, args->walls);
 	mlx_image_to_window(args->mlx, args->walls, 0, 0);
 }
 

@@ -75,16 +75,3 @@ int	main(int argc, char **argv)
 	free_cube(&args);
 	free_struct_map(&map);
 }
-
-void	free_cube(t_args *args)
-{
-	mlx_delete_texture(args->no_text);
-	mlx_delete_texture(args->so_text);
-	mlx_delete_texture(args->we_text);
-	mlx_delete_texture(args->ea_text);
-	mlx_delete_image(args->mlx, args->img);
-	mlx_delete_image(args->mlx, args->back);
-	mlx_delete_image(args->mlx, args->walls);
-	free_structs(args);
-	mlx_terminate(args->mlx);
-}

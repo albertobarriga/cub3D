@@ -1,6 +1,5 @@
 #include "../../includes/cub3D.h"
 
-
 void	hook(void *param)
 {
 	t_args	*args;

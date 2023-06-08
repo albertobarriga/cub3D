@@ -24,7 +24,6 @@ void	init_args(t_args *args, t_map *map)
 {
 	mlx_load_text(args, map);
 	mlx_loop_hook(args->mlx, &hook, args);
-	// mlx_set_cursor_mode(args->mlx, MLX_MOUSE_DISABLED);
 	print_back(args, map);
 	init_player(map);
 	print_walls(args, map, map->player);
@@ -33,8 +32,8 @@ void	init_args(t_args *args, t_map *map)
 void	init_player(t_map	*map)
 {
 	map->player = malloc(sizeof(t_player));
-	map->player->x = map->pj->x;
-	map->player->y = map->pj->y;
+	map->player->x = map->pj->x + 0.5;
+	map->player->y = map->pj->y + 0.5;
 	map->player->dirx = 0;
 	map->player->diry = 0;
 	map->player->planey = 0;
